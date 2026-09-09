@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Glideinbir Tech — theme tokens
+   Light palette on :root; dark overrides in @media and [data-theme].
+--------------------------------------------------------------------------- */
+:root {
+  --background: #fbfbfd;
+  --surface: #ffffff;
+  --surface-2: #f4f5f9;
+  --foreground: #0b1020;
+  --muted: #5b6478;
+  --border: #e6e7ef;
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --accent: #0891b2;
+  --ring: #4f46e5;
+  --glow-a: rgba(79, 70, 229, 0.25);
+  --glow-b: rgba(8, 145, 178, 0.22);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #070a13;
+    --surface: #0d1220;
+    --surface-2: #121a2c;
+    --foreground: #e9ebf5;
+    --muted: #98a2b8;
+    --border: #1e2537;
+    --primary: #6366f1;
+    --primary-foreground: #ffffff;
+    --accent: #22d3ee;
+    --ring: #6366f1;
+    --glow-a: rgba(99, 102, 241, 0.35);
+    --glow-b: rgba(34, 211, 238, 0.28);
+  }
+}
+
+:root[data-theme="dark"] {
+  --background: #070a13;
+  --surface: #0d1220;
+  --surface-2: #121a2c;
+  --foreground: #e9ebf5;
+  --muted: #98a2b8;
+  --border: #1e2537;
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
+  --accent: #22d3ee;
+  --ring: #6366f1;
+  --glow-a: rgba(99, 102, 241, 0.35);
+  --glow-b: rgba(34, 211, 238, 0.28);
+}
+
+:root[data-theme="light"] {
+  --background: #fbfbfd;
+  --surface: #ffffff;
+  --surface-2: #f4f5f9;
+  --foreground: #0b1020;
+  --muted: #5b6478;
+  --border: #e6e7ef;
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --accent: #0891b2;
+  --ring: #4f46e5;
+  --glow-a: rgba(79, 70, 229, 0.25);
+  --glow-b: rgba(8, 145, 178, 0.22);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-display: var(--font-display), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+::selection {
+  background: color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+/* Utilities ---------------------------------------------------------------- */
+.container-px {
+  padding-inline: 1.25rem;
+}
+@media (min-width: 768px) {
+  .container-px {
+    padding-inline: 2rem;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(120deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-glow {
+  background:
+    radial-gradient(40rem 20rem at 20% 0%, var(--glow-a), transparent 60%),
+    radial-gradient(35rem 20rem at 90% 10%, var(--glow-b), transparent 55%);
+}
+
+.card-hover {
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--border) 60%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--border) 60%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}

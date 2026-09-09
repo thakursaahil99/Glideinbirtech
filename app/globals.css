@@ -139,7 +139,7 @@ body {
 }
 .card-hover:hover {
   transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  border-color: color-mix(in srgb, var(--card-accent, var(--primary)) 45%, var(--border));
 }
 
 .grid-bg {

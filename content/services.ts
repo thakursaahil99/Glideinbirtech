@@ -5,6 +5,7 @@ export type Bilingual = { en: string; hi: string };
 export type Service = {
   slug: string;
   icon: string; // lucide icon key, resolved in components/sections/Services.tsx
+  accent: string; // used for the card visual + hover
   title: Bilingual;
   tagline: Bilingual;
   points: Bilingual[];
@@ -14,6 +15,7 @@ export const services: Service[] = [
   {
     slug: "landing-pages",
     icon: "rocket",
+    accent: "#6366f1",
     title: { en: "Landing pages & websites", hi: "लैंडिंग पेज और वेबसाइट" },
     tagline: {
       en: "A fast, modern site that makes visitors trust you and take action.",
@@ -29,6 +31,7 @@ export const services: Service[] = [
   {
     slug: "ecommerce",
     icon: "shopping-cart",
+    accent: "#0ea5e9",
     title: { en: "eCommerce & Magento", hi: "ईकॉमर्स और Magento" },
     tagline: {
       en: "Storefronts, custom modules and checkouts that stay fast under a big catalog.",
@@ -44,6 +47,7 @@ export const services: Service[] = [
   {
     slug: "web-apps",
     icon: "layout-dashboard",
+    accent: "#8b5cf6",
     title: { en: "Web apps & dashboards", hi: "वेब ऐप और डैशबोर्ड" },
     tagline: {
       en: "Custom tools, portals and dashboards that run your business online.",
@@ -59,6 +63,7 @@ export const services: Service[] = [
   {
     slug: "mobile-apps",
     icon: "smartphone",
+    accent: "#ec4899",
     title: { en: "Mobile apps (iOS & Android)", hi: "मोबाइल ऐप (iOS और Android)" },
     tagline: {
       en: "One codebase, both stores — native-feeling apps your users love.",
@@ -74,6 +79,7 @@ export const services: Service[] = [
   {
     slug: "seo",
     icon: "search",
+    accent: "#10b981",
     title: { en: "SEO", hi: "SEO" },
     tagline: {
       en: "Get found on Google for what your customers actually search.",
@@ -89,6 +95,7 @@ export const services: Service[] = [
   {
     slug: "google-ads",
     icon: "target",
+    accent: "#f59e0b",
     title: { en: "Google Ads", hi: "Google Ads" },
     tagline: {
       en: "Paid campaigns that bring qualified leads, not just clicks.",
@@ -104,6 +111,7 @@ export const services: Service[] = [
   {
     slug: "crm",
     icon: "database",
+    accent: "#14b8a6",
     title: { en: "CRM & custom software", hi: "CRM और कस्टम सॉफ़्टवेयर" },
     tagline: {
       en: "Your own CRM, billing or operations system — built around how you work.",
@@ -119,6 +127,7 @@ export const services: Service[] = [
   {
     slug: "performance",
     icon: "gauge",
+    accent: "#ef4444",
     title: { en: "Performance & Core Web Vitals", hi: "परफ़ॉर्मेंस और Core Web Vitals" },
     tagline: {
       en: "Make an existing slow site fast — better rankings, better conversion.",

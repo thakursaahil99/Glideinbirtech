@@ -57,13 +57,13 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </Reveal>
 
           <Reveal delay={0.26}>
-            <dl className="mt-12 grid max-w-lg grid-cols-3 gap-4 border-t border-[var(--border)] pt-8">
+            <dl className="mt-12 flex max-w-lg divide-x divide-[var(--border)] border-t border-[var(--border)] pt-7">
               {heroStats.map((s) => (
-                <div key={s.label.en} className="min-w-0">
-                  <dt className="font-display text-2xl font-bold leading-[1.2] gradient-text sm:text-3xl">
+                <div key={s.label.en} className="flex-1 px-4 first:pl-0">
+                  <dt className="font-display text-3xl font-bold leading-none gradient-text sm:text-[2.25rem]">
                     <Counter value={s.value} />
                   </dt>
-                  <dd className="mt-1.5 text-xs leading-snug text-muted text-pretty">
+                  <dd className="mt-2 text-xs leading-snug text-muted">
                     {t(s.label, locale)}
                   </dd>
                 </div>

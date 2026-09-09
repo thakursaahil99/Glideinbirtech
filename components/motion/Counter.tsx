@@ -1,42 +1,50 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useInView, useReducedMotion } from "motion/react";
 
 /**
- * Counts up to a target when scrolled into view. `value` may contain a number
- * with an optional prefix/suffix, e.g. "20+", "4h", "₹15,000".
+ * Counts up to a target when scrolled into view. `value` may carry a prefix
+ * and/or suffix, e.g. "20+", "4h", "₹15,000". If it has no number it renders
+ * unchanged.
  */
 export function Counter({ value, className }: { value: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-20% 0px" });
+  const inView = useInView(ref, { once: true, amount: 0.6 });
   const reduce = useReducedMotion();
-  const [display, setDisplay] = useState(value);
 
-  const match = value.match(/^(\D*)([\d,]+)(.*)$/);
+  const parsed = useMemo(() => {
+    const m = value.match(/^(\D*)([\d,]+)(.*)$/);
+    if (!m) return null;
+    return { prefix: m[1], target: Number(m[2].replace(/,/g, "")), suffix: m[3] };
+  }, [value]);
+
+  const [n, setN] = useState<number | null>(null);
 
   useEffect(() => {
-    // display already starts at `value`; only the count-up needs an effect
-    if (!match || reduce || !inView) return;
-    const [, prefix, digits, suffix] = match;
-    const target = Number(digits.replace(/,/g, ""));
-    const dur = 1100;
+    if (!parsed || reduce || !inView) return;
+    const dur = 1000;
     const start = performance.now();
     let raf = 0;
     const tick = (now: number) => {
-      const t = Math.min((now - start) / dur, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
-      const n = Math.round(target * eased);
-      setDisplay(`${prefix}${n.toLocaleString("en-IN")}${suffix}`);
-      if (t < 1) raf = requestAnimationFrame(tick);
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setN(Math.round(parsed.target * eased));
+      if (p < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [inView, reduce, value, match]);
+  }, [parsed, reduce, inView]);
+
+  let text = value;
+  if (parsed) {
+    const shown = n === null || reduce || !inView ? parsed.target : n;
+    text = `${parsed.prefix}${shown.toLocaleString("en-IN")}${parsed.suffix}`;
+  }
 
   return (
     <span ref={ref} className={className}>
-      {display}
+      {text}
     </span>
   );
 }

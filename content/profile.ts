@@ -39,7 +39,7 @@ export const nowList: Bilingual[] = [
 ];
 
 export const heroStats: { value: string; label: Bilingual }[] = [
-  { value: "4+", label: { en: "years shipping for the web", hi: "साल से वेब के लिए काम" } },
-  { value: "20+", label: { en: "projects delivered", hi: "प्रोजेक्ट डिलीवर किए" } },
-  { value: "3", label: { en: "core stacks — Magento · Laravel · Next.js", hi: "मुख्य स्टैक — Magento · Laravel · Next.js" } },
+  { value: "4+", label: { en: "years for the web", hi: "साल का अनुभव" } },
+  { value: "20+", label: { en: "projects delivered", hi: "प्रोजेक्ट डिलीवर" } },
+  { value: "3", label: { en: "core stacks", hi: "मुख्य स्टैक" } },
 ];

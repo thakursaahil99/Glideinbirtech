@@ -24,13 +24,13 @@ export function OrganizationJsonLd({ locale }: { locale: Locale }) {
       data={{
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
-        name: `${siteConfig.name} — ${siteConfig.studio}`,
+        name: siteConfig.studio,
         description: t(siteConfig.tagline, locale),
         url: `${siteConfig.url}/${locale}`,
         email: siteConfig.email,
         telephone: siteConfig.phone,
         areaServed: "IN",
-        founder: { "@type": "Person", name: siteConfig.name },
+        founder: { "@type": "Person", name: siteConfig.person },
         sameAs: socials,
         address: {
           "@type": "PostalAddress",
@@ -53,8 +53,9 @@ export function PersonJsonLd({ locale }: { locale: Locale }) {
       data={{
         "@context": "https://schema.org",
         "@type": "Person",
-        name: siteConfig.name,
+        name: siteConfig.person,
         jobTitle: "Full-stack developer",
+        worksFor: { "@type": "Organization", name: siteConfig.studio },
         description: t(siteConfig.tagline, locale),
         url: `${siteConfig.url}/${locale}/about`,
         email: siteConfig.email,

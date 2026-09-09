@@ -3,7 +3,8 @@
  */
 
 export const siteConfig = {
-  name: "Sahil Thakur",
+  name: "Glideinbir Tech",
+  person: "Sahil Thakur",
   studio: "Glideinbir Tech",
   role: {
     en: "Full-stack developer & digital studio",
@@ -14,7 +15,7 @@ export const siteConfig = {
     hi: "मैं ऐसी वेबसाइट, वेब ऐप और मोबाइल ऐप बनाता हूँ जो बिज़नेस को ग्राहक दिलाएँ — और उन्हें भरने वाला SEO व ऐड्स भी चलाता हूँ।",
   },
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://glideinbir-tech.vercel.app").replace(/\/$/, ""),
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "krrishredbean@gmail.com",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "sahilthakur961999@gmail.com",
   phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+91 98053 38877",
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "919805338877",
   location: "Bir Billing, Himachal Pradesh",

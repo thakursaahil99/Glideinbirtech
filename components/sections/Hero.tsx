@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 import { Container } from "@/components/ui/Section";
 import { Badge } from "@/components/ui/Card";
 import { buttonClass } from "@/components/ui/Button";
-import { LeadForm } from "@/components/forms/LeadForm";
-import { siteConfig } from "@/lib/site";
+import { Reveal } from "@/components/motion/Reveal";
+import { Counter } from "@/components/motion/Counter";
+import { HeroVisual } from "@/components/three/HeroVisual";
+import { heroStats } from "@/content/profile";
 import { t, type Dictionary, type Locale } from "@/lib/i18n";
 
 export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
@@ -12,56 +14,66 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const h = dict.hero;
 
   return (
-    <section className="relative overflow-hidden">
-      <div className="hero-glow pointer-events-none absolute inset-0 -z-10" />
-      <div className="grid-bg pointer-events-none absolute inset-0 -z-10 opacity-60" />
-      <Container className="grid items-center gap-12 py-16 sm:py-24 lg:grid-cols-[1.1fr_0.9fr]">
-        <div>
-          <Badge className="border-[var(--primary)]/30 bg-[var(--primary)]/10 text-foreground">
-            {h.badge}
-          </Badge>
-          <h1 className="mt-5 font-display text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]">
-            {h.title}
-          </h1>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg text-pretty">
-            {h.subtitle}
-          </p>
+    <section className="relative flex min-h-[92vh] items-center overflow-hidden pt-10">
+      <HeroVisual />
+      <div className="grid-bg pointer-events-none absolute inset-0 -z-10 opacity-40" />
 
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Link href={`${base}/contact`} className={buttonClass({ size: "lg" })}>
-              {h.primary} <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href={`${base}#work`}
-              className={buttonClass({ variant: "outline", size: "lg" })}
-            >
-              {h.secondary}
-            </Link>
-          </div>
+      <Container className="py-20">
+        <div className="max-w-3xl">
+          <Reveal>
+            <Badge className="border-[var(--primary)]/30 bg-[var(--primary)]/10 text-foreground">
+              {h.badge}
+            </Badge>
+          </Reveal>
 
-          <p className="mt-4 flex items-center gap-2 text-sm text-muted">
-            <CheckCircle2 className="h-4 w-4 text-[var(--accent)]" />
-            {h.trust} {t(siteConfig.responseTime, locale)}
-          </p>
+          <Reveal delay={0.06}>
+            <h1 className="mt-6 font-display text-[2.6rem] font-bold leading-[1.04] tracking-tight text-balance sm:text-6xl lg:text-7xl">
+              {h.title}
+            </h1>
+          </Reveal>
 
-          <dl className="mt-10 grid max-w-md grid-cols-3 gap-3">
-            {h.stats.map((s) => (
-              <div key={s.label} className="min-w-0">
-                <dt className="font-display text-2xl font-bold leading-[1.2] gradient-text">
-                  {s.value}
-                </dt>
-                <dd className="mt-1 text-xs leading-snug text-muted text-pretty">{s.label}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+          <Reveal delay={0.12}>
+            <p className="mt-7 max-w-xl text-base leading-relaxed text-muted sm:text-lg text-pretty">
+              {h.subtitle}
+            </p>
+          </Reveal>
 
-        <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-xl shadow-black/5 sm:p-6">
-          <p className="mb-1 font-display text-lg font-semibold">{dict.finalCta.heading}</p>
-          <p className="mb-4 text-sm text-muted">{t(siteConfig.responseTime, locale)}</p>
-          <LeadForm locale={locale} dict={dict} compact />
+          <Reveal delay={0.18}>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Link href={`${base}/contact`} className={buttonClass({ size: "lg" })}>
+                {h.primary} <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href={`${base}/work`}
+                className={buttonClass({ variant: "outline", size: "lg" })}
+              >
+                {h.secondary}
+              </Link>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.26}>
+            <dl className="mt-14 grid max-w-lg grid-cols-3 gap-4 border-t border-[var(--border)] pt-8">
+              {heroStats.map((s) => (
+                <div key={s.label.en} className="min-w-0">
+                  <dt className="font-display text-2xl font-bold leading-[1.2] gradient-text sm:text-3xl">
+                    <Counter value={s.value} />
+                  </dt>
+                  <dd className="mt-1.5 text-xs leading-snug text-muted text-pretty">
+                    {t(s.label, locale)}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
         </div>
       </Container>
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-6 flex justify-center">
+        <span className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted">
+          <ArrowDown className="h-3.5 w-3.5 animate-bounce" /> {h.scroll}
+        </span>
+      </div>
     </section>
   );
 }

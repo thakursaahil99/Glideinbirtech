@@ -23,8 +23,13 @@ export function Logo({ className }: { className?: string }) {
   return (
     <span className={cn("inline-flex items-center gap-2 font-display font-semibold", className)}>
       <LogoMark />
-      <span className="text-[1.05rem] tracking-tight">
-        Glideinbir<span className="text-[var(--accent)]"> Tech</span>
+      <span className="flex flex-col leading-none">
+        <span className="text-[1.05rem] tracking-tight">
+          Sahil <span className="text-[var(--accent)]">Thakur</span>
+        </span>
+        <span className="mt-0.5 text-[0.62rem] font-medium uppercase tracking-[0.2em] text-muted">
+          Glideinbir Tech
+        </span>
       </span>
     </span>
   );

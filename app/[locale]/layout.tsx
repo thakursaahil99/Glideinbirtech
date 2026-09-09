@@ -23,7 +23,7 @@ export function generateStaticParams() {
 
 export const metadata: Metadata = {
   title: {
-    default: `${siteConfig.name} — Web, Mobile, SEO & Google Ads`,
+    default: `${siteConfig.name} — Full-stack developer · Web, Mobile, SEO & Ads`,
     template: `%s · ${siteConfig.name}`,
   },
   description: siteConfig.tagline.en,
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.ico" },
 };
 
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
+const bootScript = `(function(){var d=document.documentElement;d.classList.remove('no-js');try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}d.setAttribute('data-theme',t);}catch(e){}})();`;
 
 export default async function LocaleLayout({
   children,
@@ -48,11 +48,11 @@ export default async function LocaleLayout({
   return (
     <html
       lang={typedLocale}
-      className={`${inter.variable} ${spaceGrotesk.variable} h-full`}
+      className={`${inter.variable} ${spaceGrotesk.variable} h-full no-js`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col antialiased">
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <Analytics />
         <Header locale={typedLocale} dict={dict} />
         <main className="flex-1 pb-14 sm:pb-0">{children}</main>

@@ -12,18 +12,26 @@ function JsonLdScript({ data }: { data: Record<string, unknown> }) {
   );
 }
 
+const socials = [
+  siteConfig.socials.github,
+  siteConfig.socials.linkedin,
+  siteConfig.socials.glideinbir,
+];
+
 export function OrganizationJsonLd({ locale }: { locale: Locale }) {
   return (
     <JsonLdScript
       data={{
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
-        name: siteConfig.name,
+        name: `${siteConfig.name} — ${siteConfig.studio}`,
         description: t(siteConfig.tagline, locale),
         url: `${siteConfig.url}/${locale}`,
         email: siteConfig.email,
         telephone: siteConfig.phone,
         areaServed: "IN",
+        founder: { "@type": "Person", name: siteConfig.name },
+        sameAs: socials,
         address: {
           "@type": "PostalAddress",
           addressLocality: "Bir",
@@ -34,6 +42,31 @@ export function OrganizationJsonLd({ locale }: { locale: Locale }) {
           "@type": "Offer",
           itemOffered: { "@type": "Service", name: serviceTitle(s, locale) },
         })),
+      }}
+    />
+  );
+}
+
+export function PersonJsonLd({ locale }: { locale: Locale }) {
+  return (
+    <JsonLdScript
+      data={{
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: siteConfig.name,
+        jobTitle: "Full-stack developer",
+        description: t(siteConfig.tagline, locale),
+        url: `${siteConfig.url}/${locale}/about`,
+        email: siteConfig.email,
+        telephone: siteConfig.phone,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Bir Billing",
+          addressRegion: "Himachal Pradesh",
+          addressCountry: "IN",
+        },
+        sameAs: socials,
+        knowsAbout: ["Next.js", "React", "Laravel", "Magento", "SEO", "Google Ads"],
       }}
     />
   );

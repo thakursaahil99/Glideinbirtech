@@ -27,6 +27,21 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: "ecommerce",
+    icon: "shopping-cart",
+    title: { en: "eCommerce & Magento", hi: "ईकॉमर्स और Magento" },
+    tagline: {
+      en: "Storefronts, custom modules and checkouts that stay fast under a big catalog.",
+      hi: "बड़े कैटलॉग के बावजूद तेज़ रहने वाले स्टोरफ़्रंट, कस्टम मॉड्यूल और चेकआउट।",
+    },
+    points: [
+      { en: "Magento 2 themes & custom modules", hi: "Magento 2 थीम और कस्टम मॉड्यूल" },
+      { en: "Checkout & payment integrations", hi: "चेकआउट और पेमेंट इंटीग्रेशन" },
+      { en: "Catalog & cart performance tuning", hi: "कैटलॉग और कार्ट परफ़ॉर्मेंस ट्यूनिंग" },
+      { en: "CMS blocks for no-code landing pages", hi: "बिना कोड लैंडिंग पेज के लिए CMS ब्लॉक" },
+    ],
+  },
+  {
     slug: "web-apps",
     icon: "layout-dashboard",
     title: { en: "Web apps & dashboards", hi: "वेब ऐप और डैशबोर्ड" },
@@ -99,6 +114,21 @@ export const services: Service[] = [
       { en: "Quotes, invoices & payment status", hi: "कोटेशन, इनवॉइस और पेमेंट स्टेटस" },
       { en: "WhatsApp & email automation", hi: "WhatsApp और ईमेल ऑटोमेशन" },
       { en: "Team access with permissions", hi: "अनुमतियों के साथ टीम एक्सेस" },
+    ],
+  },
+  {
+    slug: "performance",
+    icon: "gauge",
+    title: { en: "Performance & Core Web Vitals", hi: "परफ़ॉर्मेंस और Core Web Vitals" },
+    tagline: {
+      en: "Make an existing slow site fast — better rankings, better conversion.",
+      hi: "किसी धीमी साइट को तेज़ बनाएँ — बेहतर रैंकिंग, बेहतर कन्वर्ज़न।",
+    },
+    points: [
+      { en: "Lighthouse & field-data audit", hi: "Lighthouse और फ़ील्ड-डेटा ऑडिट" },
+      { en: "Image, font & JavaScript diet", hi: "इमेज, फ़ॉन्ट और JavaScript कम करना" },
+      { en: "Caching, CDN & render-path fixes", hi: "कैशिंग, CDN और रेंडर-पाथ सुधार" },
+      { en: "Before/after report with numbers", hi: "आँकड़ों के साथ पहले/बाद की रिपोर्ट" },
     ],
   },
 ];

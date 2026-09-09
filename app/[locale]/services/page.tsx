@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Portfolio } from "@/components/sections/Portfolio";
+import { Services } from "@/components/sections/Services";
+import { Process } from "@/components/sections/Process";
+import { Pricing } from "@/components/sections/Pricing";
+import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
@@ -15,13 +18,13 @@ export async function generateMetadata({
   const dict = getDictionary(typed);
   return buildMetadata({
     locale: typed,
-    path: "/work",
-    title: dict.work.pageTitle,
-    description: dict.work.pageSubheading,
+    path: "/services",
+    title: dict.services.pageTitle,
+    description: dict.services.pageSubheading,
   });
 }
 
-export default async function WorkPage({
+export default async function ServicesPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -33,7 +36,10 @@ export default async function WorkPage({
 
   return (
     <>
-      <Portfolio locale={typed} dict={dict} variant="page" />
+      <Services locale={typed} dict={dict} variant="page" />
+      <Process locale={typed} dict={dict} />
+      <Pricing locale={typed} dict={dict} />
+      <Faq locale={typed} dict={dict} />
       <FinalCta locale={typed} dict={dict} />
     </>
   );

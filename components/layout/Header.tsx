@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { LangToggle } from "@/components/layout/LangToggle";
@@ -13,14 +14,14 @@ import { cn } from "@/lib/utils";
 export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
   const base = `/${locale}`;
 
   const links = [
-    { href: `${base}#services`, label: dict.nav.services },
-    { href: `${base}#stack`, label: dict.nav.stack },
-    { href: `${base}#work`, label: dict.nav.work },
-    { href: `${base}#process`, label: dict.nav.process },
-    { href: `${base}#pricing`, label: dict.nav.pricing },
+    { href: `${base}/services`, label: dict.nav.services },
+    { href: `${base}/work`, label: dict.nav.work },
+    { href: `${base}/about`, label: dict.nav.about },
+    { href: `${base}/contact`, label: dict.nav.contact },
   ];
 
   useEffect(() => {
@@ -31,29 +32,46 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   }, []);
 
   useEffect(() => {
+    // close the mobile menu whenever the route changes
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [open]);
 
+  function isActive(href: string) {
+    return pathname === href || pathname.startsWith(href + "/");
+  }
+
   return (
     <header
       className={cn(
         "sticky top-0 z-50 border-b transition-colors",
         scrolled
-          ? "border-[var(--border)] bg-[color-mix(in_srgb,var(--background)_88%,transparent)] backdrop-blur-md"
+          ? "border-[var(--border)] bg-[color-mix(in_srgb,var(--background)_85%,transparent)] backdrop-blur-md"
           : "border-transparent bg-transparent",
       )}
     >
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between container-px">
-        <Link href={base} aria-label={dict.footer.getQuote} onClick={() => setOpen(false)}>
+        <Link href={base} aria-label="Home">
           <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-7 text-sm text-muted lg:flex">
+        <nav className="hidden items-center gap-8 text-sm lg:flex">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="hover:text-foreground">
+            <Link
+              key={l.href}
+              href={l.href}
+              className={cn(
+                "transition-colors hover:text-foreground",
+                isActive(l.href) ? "text-foreground" : "text-muted",
+              )}
+            >
               {l.label}
             </Link>
           ))}
@@ -86,8 +104,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                 <Link
                   key={l.href}
                   href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="border-b border-[var(--border)] py-3 text-base"
+                  className="border-b border-[var(--border)] py-3.5 text-base"
                 >
                   {l.label}
                 </Link>
@@ -99,7 +116,6 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             </div>
             <Link
               href={`${base}/contact`}
-              onClick={() => setOpen(false)}
               className={buttonClass({ className: "mt-4 w-full" })}
             >
               {dict.nav.cta}

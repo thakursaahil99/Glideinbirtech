@@ -1,31 +1,37 @@
 import { Section, SectionHeading } from "@/components/ui/Section";
+import { Card } from "@/components/ui/Card";
+import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import { Tilt } from "@/components/motion/Tilt";
 import { processSteps } from "@/content/process";
 import { t, type Dictionary, type Locale } from "@/lib/i18n";
 
 export function Process({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   return (
-    <Section id="process">
+    <Section id="process" tone="raised">
       <SectionHeading
-        eyebrow={dict.nav.process}
+        eyebrow={dict.process.eyebrow}
         title={dict.process.heading}
         subtitle={dict.process.subheading}
       />
-      <ol className="mt-12 grid gap-6 md:grid-cols-5">
-        {processSteps.map((s, i) => (
-          <li key={s.step} className="relative">
-            <div className="flex items-center gap-3 md:block">
-              <span className="font-display text-sm font-bold text-[var(--accent)]">
-                {s.step}
-              </span>
-              {i < processSteps.length - 1 ? (
-                <span className="hidden h-px flex-1 bg-[var(--border)] md:mt-3 md:block" />
-              ) : null}
-            </div>
-            <h3 className="mt-3 font-display text-base font-semibold">{t(s.title, locale)}</h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-muted">{t(s.text, locale)}</p>
-          </li>
+      <RevealGroup className="mt-12 grid gap-5 md:grid-cols-2">
+        {processSteps.map((s) => (
+          <RevealItem key={s.step} className="h-full">
+            <Tilt max={4} className="h-full">
+              <Card hover className="flex h-full gap-5 bg-[var(--background)]">
+                <span className="font-display text-4xl font-bold text-[var(--primary)]/25">
+                  {s.step}
+                </span>
+                <div>
+                  <h3 className="font-display text-xl font-semibold">{t(s.title, locale)}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted text-pretty">
+                    {t(s.text, locale)}
+                  </p>
+                </div>
+              </Card>
+            </Tilt>
+          </RevealItem>
         ))}
-      </ol>
+      </RevealGroup>
     </Section>
   );
 }

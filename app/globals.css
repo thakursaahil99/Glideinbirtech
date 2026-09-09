@@ -5,65 +5,77 @@
    Light palette on :root; dark overrides in @media and [data-theme].
 --------------------------------------------------------------------------- */
 :root {
-  --background: #fbfbfd;
+  --background: #fafafb;
   --surface: #ffffff;
-  --surface-2: #f4f5f9;
-  --foreground: #0b1020;
-  --muted: #5b6478;
-  --border: #e6e7ef;
+  --surface-2: #f3f4f8;
+  --foreground: #0a0e1a;
+  --muted: #5a6274;
+  --border: #e7e8ef;
+  --border-strong: #d6d8e2;
   --primary: #4f46e5;
   --primary-foreground: #ffffff;
-  --accent: #0891b2;
+  --accent: #0e7490;
   --ring: #4f46e5;
-  --glow-a: rgba(79, 70, 229, 0.25);
-  --glow-b: rgba(8, 145, 178, 0.22);
+  --glow-a: rgba(79, 70, 229, 0.22);
+  --glow-b: rgba(14, 116, 144, 0.18);
+  --card-shadow: 0 1px 2px rgba(10, 14, 26, 0.04), 0 8px 24px -12px rgba(10, 14, 26, 0.12);
+  --hairline: rgba(10, 14, 26, 0.04);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --background: #070a13;
-    --surface: #0d1220;
-    --surface-2: #121a2c;
-    --foreground: #e9ebf5;
-    --muted: #98a2b8;
-    --border: #1e2537;
-    --primary: #6366f1;
+    --background: #060910;
+    --surface: #0c111d;
+    --surface-2: #121828;
+    --foreground: #eaecf6;
+    --muted: #949db6;
+    --border: #1c2334;
+    --border-strong: #2a3348;
+    --primary: #6d67f0;
     --primary-foreground: #ffffff;
-    --accent: #22d3ee;
-    --ring: #6366f1;
-    --glow-a: rgba(99, 102, 241, 0.35);
-    --glow-b: rgba(34, 211, 238, 0.28);
+    --accent: #34d4e6;
+    --ring: #6d67f0;
+    --glow-a: rgba(109, 103, 240, 0.32);
+    --glow-b: rgba(52, 212, 230, 0.22);
+    --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 20px 40px -20px rgba(0, 0, 0, 0.55);
+    --hairline: rgba(255, 255, 255, 0.05);
   }
 }
 
 :root[data-theme="dark"] {
-  --background: #070a13;
-  --surface: #0d1220;
-  --surface-2: #121a2c;
-  --foreground: #e9ebf5;
-  --muted: #98a2b8;
-  --border: #1e2537;
-  --primary: #6366f1;
+  --background: #060910;
+  --surface: #0c111d;
+  --surface-2: #121828;
+  --foreground: #eaecf6;
+  --muted: #949db6;
+  --border: #1c2334;
+  --border-strong: #2a3348;
+  --primary: #6d67f0;
   --primary-foreground: #ffffff;
-  --accent: #22d3ee;
-  --ring: #6366f1;
-  --glow-a: rgba(99, 102, 241, 0.35);
-  --glow-b: rgba(34, 211, 238, 0.28);
+  --accent: #34d4e6;
+  --ring: #6d67f0;
+  --glow-a: rgba(109, 103, 240, 0.32);
+  --glow-b: rgba(52, 212, 230, 0.22);
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 20px 40px -20px rgba(0, 0, 0, 0.55);
+  --hairline: rgba(255, 255, 255, 0.05);
 }
 
 :root[data-theme="light"] {
-  --background: #fbfbfd;
+  --background: #fafafb;
   --surface: #ffffff;
-  --surface-2: #f4f5f9;
-  --foreground: #0b1020;
-  --muted: #5b6478;
-  --border: #e6e7ef;
+  --surface-2: #f3f4f8;
+  --foreground: #0a0e1a;
+  --muted: #5a6274;
+  --border: #e7e8ef;
+  --border-strong: #d6d8e2;
   --primary: #4f46e5;
   --primary-foreground: #ffffff;
-  --accent: #0891b2;
+  --accent: #0e7490;
   --ring: #4f46e5;
-  --glow-a: rgba(79, 70, 229, 0.25);
-  --glow-b: rgba(8, 145, 178, 0.22);
+  --glow-a: rgba(79, 70, 229, 0.22);
+  --glow-b: rgba(14, 116, 144, 0.18);
+  --card-shadow: 0 1px 2px rgba(10, 14, 26, 0.04), 0 8px 24px -12px rgba(10, 14, 26, 0.12);
+  --hairline: rgba(10, 14, 26, 0.04);
 }
 
 @theme inline {
@@ -73,12 +85,13 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-accent: var(--accent);
   --color-ring: var(--ring);
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  --font-display: var(--font-display), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-display: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
 }
 
 * {
@@ -91,11 +104,34 @@ html {
 }
 
 body {
+  position: relative;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv01";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* fine grain + top vignette for depth */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 60% at 50% 0%, color-mix(in srgb, var(--primary) 7%, transparent), transparent 60%);
+  opacity: 0.6;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -104,8 +140,15 @@ body {
   }
 }
 
+h1,
+h2,
+h3,
+.font-display {
+  letter-spacing: -0.02em;
+}
+
 ::selection {
-  background: color-mix(in srgb, var(--primary) 30%, transparent);
+  background: color-mix(in srgb, var(--primary) 32%, transparent);
 }
 
 /* Utilities ---------------------------------------------------------------- */
@@ -119,7 +162,7 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(120deg, var(--primary), var(--accent));
+  background: linear-gradient(115deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -131,23 +174,37 @@ body {
     radial-gradient(35rem 20rem at 90% 10%, var(--glow-b), transparent 55%);
 }
 
+/* premium card surface: hairline inner ring + soft shadow */
+.surface-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow:
+    inset 0 1px 0 var(--hairline),
+    var(--card-shadow);
+}
+
 .card-hover {
   transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    background-color 0.2s ease;
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 .card-hover:hover {
-  transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--card-accent, var(--primary)) 45%, var(--border));
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--card-accent, var(--primary)) 40%, var(--border));
+  box-shadow:
+    inset 0 1px 0 var(--hairline),
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    0 28px 50px -24px color-mix(in srgb, var(--card-accent, var(--primary)) 45%, transparent);
 }
 
 .grid-bg {
   background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--border) 60%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--border) 60%, transparent) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+    linear-gradient(to right, color-mix(in srgb, var(--border) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--border) 55%, transparent) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 55% at 50% 0%, #000 35%, transparent 100%);
 }
 
 @keyframes marquee {
@@ -172,8 +229,7 @@ body {
   }
 }
 
-/* If JS never runs, framer-motion's inline opacity:0 would hide content —
-   this makes every reveal wrapper visible again. */
+/* If JS never runs, framer-motion's inline opacity:0 would hide content. */
 .no-js [style*="opacity:0"],
 .no-js [style*="opacity: 0"] {
   opacity: 1 !important;
@@ -181,10 +237,30 @@ body {
 }
 
 .eyebrow {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
+}
+.eyebrow::before {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+.eyebrow-center {
+  justify-content: center;
+}
+
+/* keep page content above the ::before vignette */
+main,
+header,
+footer {
+  position: relative;
+  z-index: 1;
 }

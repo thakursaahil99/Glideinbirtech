@@ -70,12 +70,16 @@ export function SectionHeading({
         className,
       )}
     >
-      {eyebrow ? <p className="eyebrow mb-4">{eyebrow}</p> : null}
-      <h2 className="font-display text-3xl font-bold leading-[1.08] tracking-tight text-balance sm:text-4xl lg:text-5xl">
+      {eyebrow ? (
+        <p className={cn("eyebrow mb-5", align === "center" && "eyebrow-center")}>
+          {eyebrow}
+        </p>
+      ) : null}
+      <h2 className="font-display text-[1.9rem] font-semibold leading-[1.1] text-balance sm:text-4xl lg:text-[2.9rem]">
         {title}
       </h2>
       {subtitle ? (
-        <p className="mt-5 text-base leading-relaxed text-muted sm:text-lg text-pretty">
+        <p className="mt-5 text-base leading-relaxed text-muted sm:text-[1.05rem] text-pretty">
           {subtitle}
         </p>
       ) : null}

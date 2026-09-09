@@ -174,7 +174,7 @@ export const hi: Dictionary = {
     connectTitle: "जुड़ें",
     getQuote: "प्रोजेक्ट शुरू करें",
     rights: "सर्वाधिकार सुरक्षित।",
-    builtWith: "Next.js और Three.js से बनी। कोड पूरी तरह आपका।",
+    builtWith: "Next.js से बनी। कोड पूरी तरह आपका।",
     privacy: "प्राइवेसी नीति",
     terms: "सेवा की शर्तें",
   },

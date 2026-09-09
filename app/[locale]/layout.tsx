@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "../globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -10,10 +10,12 @@ import { Analytics } from "@/components/analytics/Analytics";
 import { getDictionary, isLocale, locales, type Locale } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+// Space Grotesk everywhere — one geometric family for headings and body,
+// matching glideinbir.vercel.app.
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-display",
+  variable: "--font-grotesk",
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -48,7 +50,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={typedLocale}
-      className={`${inter.variable} ${spaceGrotesk.variable} h-full no-js`}
+      className={`${spaceGrotesk.variable} h-full no-js`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col antialiased">

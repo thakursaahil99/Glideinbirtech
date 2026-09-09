@@ -172,7 +172,7 @@ export const en = {
     connectTitle: "Connect",
     getQuote: "Start a project",
     rights: "All rights reserved.",
-    builtWith: "Built with Next.js & Three.js. Code you fully own.",
+    builtWith: "Built with Next.js. Code you fully own.",
     privacy: "Privacy Policy",
     terms: "Terms of Service",
   },

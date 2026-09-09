@@ -2,9 +2,10 @@ import "server-only";
 import { Resend } from "resend";
 import type { LeadInput } from "@/lib/schema";
 
-const apiKey = process.env.RESEND_API_KEY;
-const toEmail = process.env.LEAD_TO_EMAIL ?? "sahilthakur961999@gmail.com";
-const fromEmail = process.env.LEAD_FROM_EMAIL ?? "Glideinbir Tech <onboarding@resend.dev>";
+const apiKey = process.env.RESEND_API_KEY?.trim();
+const toEmail = process.env.LEAD_TO_EMAIL?.trim() || "sahilthakur961999@gmail.com";
+const fromEmail =
+  process.env.LEAD_FROM_EMAIL?.trim() || "Glideinbir Tech <onboarding@resend.dev>";
 
 const resend = apiKey ? new Resend(apiKey) : null;
 

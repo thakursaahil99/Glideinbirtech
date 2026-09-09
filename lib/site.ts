@@ -2,6 +2,15 @@
  * Central site configuration. Safe to edit — everything here is presentational.
  */
 
+// Trim + fall back on blank OR unset env vars (Vercel can inject "" for an
+// empty-valued variable, which `??` would not catch).
+function env(value: string | undefined, fallback: string) {
+  const v = value?.trim();
+  return v && v.length > 0 ? v : fallback;
+}
+
+const rawUrl = env(process.env.NEXT_PUBLIC_SITE_URL, "https://glideinbir-tech.vercel.app");
+
 export const siteConfig = {
   name: "Glideinbir Tech",
   person: "Sahil Thakur",
@@ -14,10 +23,10 @@ export const siteConfig = {
     en: "I build websites, web apps and mobile apps that bring businesses customers — and run the SEO and ads that feed them.",
     hi: "मैं ऐसी वेबसाइट, वेब ऐप और मोबाइल ऐप बनाता हूँ जो बिज़नेस को ग्राहक दिलाएँ — और उन्हें भरने वाला SEO व ऐड्स भी चलाता हूँ।",
   },
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://glideinbir-tech.vercel.app").replace(/\/$/, ""),
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "sahilthakur961999@gmail.com",
-  phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+91 98053 38877",
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "919805338877",
+  url: (/^https?:\/\//.test(rawUrl) ? rawUrl : `https://${rawUrl}`).replace(/\/$/, ""),
+  email: env(process.env.NEXT_PUBLIC_CONTACT_EMAIL, "sahilthakur961999@gmail.com"),
+  phone: env(process.env.NEXT_PUBLIC_CONTACT_PHONE, "+91 98053 38877"),
+  whatsapp: env(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER, "919805338877"),
   location: "Bir Billing, Himachal Pradesh",
   responseTime: {
     en: "Replies within 4 working hours.",

@@ -27,11 +27,17 @@ export function Intro({ locale, dict }: { locale: Locale; dict: Dictionary }) {
       </div>
 
       <Reveal className="mt-14">
-        <div className="relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--background)] py-6 shadow-[inset_0_1px_0_var(--hairline)]">
-          <span className="absolute left-4 top-0 -translate-y-1/2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-[var(--accent)]">
-            {dict.marquee.label}
-          </span>
-          <Marquee items={toolbox} />
+        <div className="rounded-2xl border border-[var(--border)] bg-[var(--background)] shadow-[inset_0_1px_0_var(--hairline)]">
+          <div className="flex items-center gap-3 border-b border-[var(--border)] px-5 py-3">
+            <span className="flex h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
+              {dict.marquee.label}
+            </span>
+            <span className="h-px flex-1 bg-[var(--border)]" />
+          </div>
+          <div className="overflow-hidden rounded-b-2xl py-5">
+            <Marquee items={toolbox} />
+          </div>
         </div>
       </Reveal>
     </Section>

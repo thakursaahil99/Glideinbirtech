@@ -26,10 +26,14 @@ export function Intro({ locale, dict }: { locale: Locale; dict: Dictionary }) {
         </Reveal>
       </div>
 
-      <div className="mt-14">
-        <p className="mb-4 text-xs uppercase tracking-widest text-muted">{dict.marquee.label}</p>
-        <Marquee items={toolbox} speed={38} />
-      </div>
+      <Reveal className="mt-14">
+        <div className="relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--background)] py-6 shadow-[inset_0_1px_0_var(--hairline)]">
+          <span className="absolute left-4 top-0 -translate-y-1/2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-[var(--accent)]">
+            {dict.marquee.label}
+          </span>
+          <Marquee items={toolbox} />
+        </div>
+      </Reveal>
     </Section>
   );
 }

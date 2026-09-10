@@ -13,14 +13,14 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const h = dict.hero;
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative -mt-16 overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="animate-drift absolute left-[-12%] top-[-14%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,var(--glow-b),transparent_65%)] blur-3xl" />
         <div className="animate-drift absolute right-[-12%] top-[16%] h-[38rem] w-[38rem] rounded-full bg-[radial-gradient(circle,var(--glow-a),transparent_65%)] blur-3xl [animation-delay:-9s]" />
       </div>
       <div className="grid-bg pointer-events-none absolute inset-0 -z-10 opacity-25" />
 
-      <Container className="grid items-center gap-14 py-16 sm:py-24 lg:grid-cols-[1.05fr_0.95fr] lg:py-28">
+      <Container className="grid items-center gap-14 pb-16 pt-28 sm:pb-24 sm:pt-36 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
           <div className="rise">
             <Badge className="border-[var(--primary)]/30 bg-[var(--primary)]/10 text-foreground">

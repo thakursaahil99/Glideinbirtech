@@ -233,6 +233,27 @@ h3,
   }
 }
 
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(6%, -4%, 0) scale(1.08);
+  }
+  66% {
+    transform: translate3d(-4%, 5%, 0) scale(0.96);
+  }
+}
+.animate-drift {
+  animation: drift 18s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-drift {
+    animation: none;
+  }
+}
+
 /* JS-independent entrance for above-the-fold (hero) content */
 @keyframes rise {
   from {

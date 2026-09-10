@@ -2,6 +2,7 @@ import type { Dictionary } from "@/lib/i18n";
 
 export const hi: Dictionary = {
   nav: {
+    home: "होम",
     services: "सेवाएँ",
     work: "काम",
     about: "मेरे बारे में",

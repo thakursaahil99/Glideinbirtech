@@ -14,11 +14,11 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
 
   return (
     <section className="relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-[-10%] top-[-10%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,var(--glow-b),transparent_65%)] blur-3xl" />
-        <div className="absolute right-[-10%] top-[20%] h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle,var(--glow-a),transparent_65%)] blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="animate-drift absolute left-[-12%] top-[-14%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,var(--glow-b),transparent_65%)] blur-3xl" />
+        <div className="animate-drift absolute right-[-12%] top-[16%] h-[38rem] w-[38rem] rounded-full bg-[radial-gradient(circle,var(--glow-a),transparent_65%)] blur-3xl [animation-delay:-9s]" />
       </div>
-      <div className="grid-bg pointer-events-none absolute inset-0 -z-10 opacity-30" />
+      <div className="grid-bg pointer-events-none absolute inset-0 -z-10 opacity-25" />
 
       <Container className="grid items-center gap-14 py-16 sm:py-24 lg:grid-cols-[1.05fr_0.95fr] lg:py-28">
         <div>

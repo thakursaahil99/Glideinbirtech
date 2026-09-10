@@ -34,9 +34,9 @@ function Chip({
 
 export function HeroShowcase() {
   return (
-    <div className="relative mx-auto hidden w-full max-w-[560px] lg:block">
+    <div className="relative mx-auto hidden w-full max-w-[520px] px-6 lg:block">
       {/* glow */}
-      <div className="absolute -inset-8 -z-10 rounded-[3rem] bg-[radial-gradient(60%_60%_at_60%_40%,var(--glow-a),transparent_70%)] blur-2xl" />
+      <div className="absolute -inset-6 -z-10 rounded-[3rem] bg-[radial-gradient(60%_60%_at_55%_45%,var(--glow-a),transparent_70%)] blur-2xl" />
 
       {/* main browser */}
       <div className="overflow-hidden rounded-2xl border border-[var(--border-strong)] bg-[var(--surface)] shadow-[inset_0_1px_0_var(--hairline),0_40px_80px_-30px_rgba(0,0,0,0.55)] rotate-[-1.5deg]">
@@ -59,7 +59,7 @@ export function HeroShowcase() {
       </div>
 
       {/* secondary browser, behind-right */}
-      <div className="absolute -right-6 top-10 -z-[1] w-[46%] overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface)] opacity-80 shadow-2xl shadow-black/40 rotate-[5deg]">
+      <div className="absolute right-0 top-8 -z-[1] w-[42%] overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface)] opacity-80 shadow-2xl shadow-black/40 rotate-[5deg]">
         <div className="flex gap-1 border-b border-[var(--border)] bg-[var(--surface-2)] px-2 py-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--muted)]" />
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--muted)]" />
@@ -79,14 +79,14 @@ export function HeroShowcase() {
         icon={<Zap className="h-4 w-4" />}
         value="10,000+"
         label="flights booked"
-        className="-left-6 top-14"
+        className="left-0 top-16"
         delay="-2s"
       />
       <Chip
         icon={<Star className="h-4 w-4" />}
         value="98 / 100"
         label="Lighthouse"
-        className="-bottom-5 right-2"
+        className="-bottom-4 right-4"
         delay="-4s"
       />
     </div>

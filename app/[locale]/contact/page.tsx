@@ -36,25 +36,26 @@ export default async function ContactPage({
   const c = dict.contactPage;
 
   return (
-    <Section className="relative overflow-hidden">
+    <Section size="lg" className="relative overflow-hidden">
       <div className="hero-glow pointer-events-none absolute inset-0 -z-10 opacity-70" />
       <OrganizationJsonLd locale={typed} />
-      <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr]">
+      <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
         <div>
-          <h1 className="font-display text-3xl font-bold tracking-tight sm:text-4xl text-balance">
+          <p className="eyebrow mb-4">{c.title}</p>
+          <h1 className="font-display text-[2rem] font-semibold leading-[1.1] text-balance sm:text-4xl lg:text-5xl">
             {c.heading}
           </h1>
-          <p className="mt-4 text-base leading-relaxed text-muted text-pretty">
+          <p className="mt-5 text-base leading-relaxed text-muted text-pretty sm:text-lg">
             {c.subheading}
           </p>
-          <p className="mt-3 text-sm font-medium text-[var(--accent)]">
+          <p className="mt-4 text-sm font-medium text-[var(--accent)]">
             {t(siteConfig.responseTime, typed)}
           </p>
 
-          <h2 className="mt-8 text-sm font-semibold uppercase tracking-wider text-muted">
+          <h2 className="mt-10 text-xs font-semibold uppercase tracking-widest text-muted">
             {c.directTitle}
           </h2>
-          <div className="mt-3 space-y-3 text-sm">
+          <div className="mt-4 space-y-3 text-sm">
             <a
               href={whatsappLink(dict.cta.whatsappMessage)}
               target="_blank"
@@ -82,7 +83,7 @@ export default async function ContactPage({
           </div>
         </div>
 
-        <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-8">
+        <div className="surface-card p-6 sm:p-8">
           <LeadForm locale={typed} dict={dict} />
         </div>
       </div>

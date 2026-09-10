@@ -9,7 +9,6 @@ import type { LeadState } from "@/lib/schema";
 import { buttonClass } from "@/components/ui/Button";
 import { track } from "@/lib/track";
 import type { Dictionary, Locale } from "@/lib/i18n";
-import { cn } from "@/lib/utils";
 
 const initialState: LeadState = { status: "idle" };
 
@@ -50,25 +49,17 @@ function SubmitButton({ label, pendingLabel }: { label: string; pendingLabel: st
   );
 }
 
-export function LeadForm({
-  locale,
-  dict,
-  compact = false,
-}: {
-  locale: Locale;
-  dict: Dictionary;
-  compact?: boolean;
-}) {
+export function LeadForm({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const f = dict.form;
   const [state, formAction] = useActionState(submitLead, initialState);
   const router = useRouter();
 
   useEffect(() => {
     if (state.status === "success") {
-      track("generate_lead", { location: compact ? "hero" : "section" });
+      track("generate_lead");
       router.push(`/${locale}/thank-you`);
     }
-  }, [state.status, compact, locale, router]);
+  }, [state.status, locale, router]);
 
   const errs = state.fieldErrors ?? {};
 
@@ -84,7 +75,7 @@ export function LeadForm({
       />
       <input type="hidden" name="locale" value={locale} />
 
-      <div className={cn("grid gap-4", !compact && "sm:grid-cols-2")}>
+      <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <Label htmlFor="lead-name">{f.name} *</Label>
           <input
@@ -112,7 +103,7 @@ export function LeadForm({
         </div>
       </div>
 
-      <div className={cn("grid gap-4", !compact && "sm:grid-cols-2")}>
+      <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <Label htmlFor="lead-email">{f.email}</Label>
           <input
@@ -140,19 +131,17 @@ export function LeadForm({
         </div>
       </div>
 
-      {!compact ? (
-        <div>
-          <Label htmlFor="lead-budget">{f.budget}</Label>
-          <select id="lead-budget" name="budget" defaultValue="" className={fieldBase}>
-            <option value="">—</option>
-            {f.budgetOptions.map((o) => (
-              <option key={o} value={o}>
-                {o}
-              </option>
-            ))}
-          </select>
-        </div>
-      ) : null}
+      <div>
+        <Label htmlFor="lead-budget">{f.budget}</Label>
+        <select id="lead-budget" name="budget" defaultValue="" className={fieldBase}>
+          <option value="">—</option>
+          {f.budgetOptions.map((o) => (
+            <option key={o} value={o}>
+              {o}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <div>
         <Label htmlFor="lead-message">{f.message} *</Label>
@@ -160,9 +149,9 @@ export function LeadForm({
           id="lead-message"
           name="message"
           required
-          rows={compact ? 3 : 4}
+          rows={4}
           placeholder={f.messagePlaceholder}
-          className={cn(fieldBase, "resize-y")}
+          className={`${fieldBase} resize-y`}
         />
         <FieldError msg={errs.message} />
       </div>

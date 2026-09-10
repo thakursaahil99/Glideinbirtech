@@ -9,6 +9,5 @@ export default function robots(): MetadataRoute.Robots {
       disallow: ["/en/thank-you", "/hi/thank-you"],
     },
     sitemap: `${siteConfig.url}/sitemap.xml`,
-    host: siteConfig.url,
   };
 }

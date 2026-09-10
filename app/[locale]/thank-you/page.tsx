@@ -38,16 +38,18 @@ export default async function ThankYouPage({
   const ty = dict.thankYou;
 
   return (
-    <Section className="relative overflow-hidden">
+    <Section size="lg" className="relative overflow-hidden">
       <div className="hero-glow pointer-events-none absolute inset-0 -z-10 opacity-70" />
       <ConversionTracker />
-      <div className="mx-auto max-w-lg text-center">
-        <CheckCircle2 className="mx-auto h-14 w-14 text-[var(--accent)]" />
-        <h1 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+      <div className="mx-auto max-w-xl text-center">
+        <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--accent)]/12 text-[var(--accent)]">
+          <CheckCircle2 className="h-8 w-8" />
+        </span>
+        <h1 className="mt-6 font-display text-[2rem] font-semibold leading-[1.1] sm:text-4xl lg:text-5xl">
           {ty.heading}
         </h1>
-        <p className="mt-4 text-base leading-relaxed text-muted">{ty.text}</p>
-        <div className="mt-7 flex flex-wrap justify-center gap-3">
+        <p className="mt-5 text-base leading-relaxed text-muted sm:text-lg">{ty.text}</p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
           <a
             href={whatsappLink(dict.cta.whatsappMessage)}
             target="_blank"

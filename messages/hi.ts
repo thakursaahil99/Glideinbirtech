@@ -169,6 +169,7 @@ export const hi: Dictionary = {
   },
   footer: {
     tagline: "फुल-स्टैक डेवलपर — वेबसाइट, ऐप, और वो मार्केटिंग जो इन्हें बढ़ाती है।",
+    ctaHeading: "आइए कुछ ऐसा बनाते हैं जो काम करे।",
     exploreTitle: "एक्सप्लोर",
     servicesTitle: "सेवाएँ",
     connectTitle: "जुड़ें",

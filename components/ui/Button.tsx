@@ -12,7 +12,7 @@ const variants: Record<Variant, string> = {
   primary:
     "bg-[var(--primary)] text-[var(--primary-foreground)] hover:brightness-110 shadow-sm shadow-[var(--glow-a)]",
   accent:
-    "bg-[var(--accent)] text-[#04121a] hover:brightness-105",
+    "bg-[var(--accent)] text-[var(--accent-foreground)] hover:brightness-110 shadow-sm shadow-[var(--glow-b)]",
   outline:
     "border border-[var(--border)] bg-[var(--surface)] text-foreground hover:border-[var(--primary)]",
   ghost: "text-foreground hover:bg-[var(--surface-2)]",

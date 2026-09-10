@@ -57,7 +57,7 @@ export default async function LocaleLayout({
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <Analytics />
         <Header locale={typedLocale} dict={dict} />
-        <main className="flex-1 pb-14 sm:pb-0">{children}</main>
+        <main className="flex-1">{children}</main>
         <Footer locale={typedLocale} dict={dict} />
         <MobileCtaBar locale={typedLocale} dict={dict} />
         <WhatsappFab message={dict.cta.whatsappMessage} />

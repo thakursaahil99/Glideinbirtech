@@ -15,6 +15,7 @@
   --primary: #4f46e5;
   --primary-foreground: #ffffff;
   --accent: #0e7490;
+  --accent-foreground: #ffffff;
   --ring: #4f46e5;
   --glow-a: rgba(79, 70, 229, 0.22);
   --glow-b: rgba(14, 116, 144, 0.18);
@@ -34,6 +35,7 @@
     --primary: #6d67f0;
     --primary-foreground: #ffffff;
     --accent: #34d4e6;
+    --accent-foreground: #04121a;
     --ring: #6d67f0;
     --glow-a: rgba(109, 103, 240, 0.32);
     --glow-b: rgba(52, 212, 230, 0.22);
@@ -53,6 +55,7 @@
   --primary: #6d67f0;
   --primary-foreground: #ffffff;
   --accent: #34d4e6;
+  --accent-foreground: #04121a;
   --ring: #6d67f0;
   --glow-a: rgba(109, 103, 240, 0.32);
   --glow-b: rgba(52, 212, 230, 0.22);
@@ -71,6 +74,7 @@
   --primary: #4f46e5;
   --primary-foreground: #ffffff;
   --accent: #0e7490;
+  --accent-foreground: #ffffff;
   --ring: #4f46e5;
   --glow-a: rgba(79, 70, 229, 0.22);
   --glow-b: rgba(14, 116, 144, 0.18);
@@ -226,6 +230,26 @@ h3,
   }
   50% {
     transform: translateY(-8px);
+  }
+}
+
+/* JS-independent entrance for above-the-fold (hero) content */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
   }
 }
 

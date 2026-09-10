@@ -167,6 +167,7 @@ export const en = {
   },
   footer: {
     tagline: "Full-stack developer — websites, apps, and the marketing that grows them.",
+    ctaHeading: "Let's build something that works.",
     exploreTitle: "Explore",
     servicesTitle: "Services",
     connectTitle: "Connect",

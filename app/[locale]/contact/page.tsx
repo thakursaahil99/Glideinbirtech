@@ -11,7 +11,8 @@ import { LocalTime } from "@/components/layout/FooterBits";
 import { OrganizationJsonLd } from "@/components/seo/JsonLd";
 import { getDictionary, isLocale, t, type Locale } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
-import { siteConfig, telLink, whatsappLink } from "@/lib/site";
+import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
+import { siteConfig, telLink, whatsappDisplay } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -42,12 +43,12 @@ export default async function ContactPage({
 
   const channels = [
     {
-      href: whatsappLink(dict.cta.whatsappMessage),
+      href: "",
+      whatsapp: true,
       icon: MessageCircle,
       color: "#25D366",
       label: c.whatsappLabel,
-      value: siteConfig.phone,
-      external: true,
+      value: whatsappDisplay(),
     },
     { href: telLink(), icon: Phone, color: "var(--primary)", label: c.phoneLabel, value: siteConfig.phone },
     {
@@ -84,9 +85,11 @@ export default async function ContactPage({
               return (
                 <Reveal key={ch.label} delay={i * 0.06}>
                   <Spotlight className="rounded-[1.5rem]">
-                    <a
+                    <ChannelLink
+                      whatsapp={ch.whatsapp}
                       href={ch.href}
-                      {...(ch.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      message={dict.cta.whatsappMessage}
+                      from={dict.cta.whatsappFrom}
                       className="group flex items-center gap-5 rounded-[1.5rem] border border-[var(--border)] bg-[var(--surface)] p-5 sm:p-6"
                     >
                       <span
@@ -104,7 +107,7 @@ export default async function ContactPage({
                         </span>
                       </span>
                       <ArrowUpRight className="h-5 w-5 shrink-0 text-muted transition-all duration-500 group-hover:rotate-45 group-hover:text-foreground" />
-                    </a>
+                    </ChannelLink>
                   </Spotlight>
                 </Reveal>
               );
@@ -137,5 +140,34 @@ export default async function ContactPage({
         </div>
       </Section>
     </>
+  );
+}
+
+function ChannelLink({
+  whatsapp,
+  href,
+  message,
+  from,
+  className,
+  children,
+}: {
+  whatsapp?: boolean;
+  href: string;
+  message: string;
+  from: string;
+  className: string;
+  children: React.ReactNode;
+}) {
+  if (whatsapp) {
+    return (
+      <WhatsAppLink message={message} from={from} className={className}>
+        {children}
+      </WhatsAppLink>
+    );
+  }
+  return (
+    <a href={href} className={className}>
+      {children}
+    </a>
   );
 }

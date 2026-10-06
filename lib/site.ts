@@ -26,7 +26,7 @@ export const siteConfig = {
   url: (/^https?:\/\//.test(rawUrl) ? rawUrl : `https://${rawUrl}`).replace(/\/$/, ""),
   email: env(process.env.NEXT_PUBLIC_CONTACT_EMAIL, "sahilthakur961999@gmail.com"),
   phone: env(process.env.NEXT_PUBLIC_CONTACT_PHONE, "+91 98053 38877"),
-  whatsapp: env(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER, "919805338877"),
+  whatsapp: env(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER, "917018157169"),
   location: "Bir Billing, Himachal Pradesh",
   responseTime: {
     en: "Replies within 4 working hours.",
@@ -41,6 +41,13 @@ export const siteConfig = {
 
 export function whatsappLink(message: string) {
   return `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(message)}`;
+}
+
+/** WhatsApp number formatted for display, e.g. "+91 70181 57169". */
+export function whatsappDisplay() {
+  const d = siteConfig.whatsapp.replace(/\D/g, "");
+  if (d.length === 12 && d.startsWith("91")) return `+91 ${d.slice(2, 7)} ${d.slice(7)}`;
+  return `+${d}`;
 }
 
 export function telLink() {

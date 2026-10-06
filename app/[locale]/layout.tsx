@@ -89,7 +89,7 @@ export default async function LocaleLayout({
         <main className="flex-1">{children}</main>
         <Footer locale={typedLocale} dict={dict} />
         <MobileCtaBar locale={typedLocale} dict={dict} />
-        <WhatsappFab message={dict.cta.whatsappMessage} />
+        <WhatsappFab message={dict.cta.whatsappMessage} from={dict.cta.whatsappFrom} />
       </body>
     </html>
   );

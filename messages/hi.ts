@@ -203,7 +203,9 @@ export const hi: Dictionary = {
     quote: "प्रोजेक्ट शुरू करें",
     call: "कॉल",
     whatsapp: "WhatsApp",
-    whatsappMessage: "नमस्ते साहिल, मुझे एक प्रोजेक्ट के बारे में बात करनी है।",
+    whatsappMessage:
+      "नमस्ते साहिल! 👋\n\nमैंने आपकी वेबसाइट *Glideinbir Tech* देखी और मैं एक प्रोजेक्ट के बारे में बात करना चाहता हूँ।\n\n• नाम:\n• मुझे क्या चाहिए:\n• अनुमानित बजट:\n\nआपके जवाब का इंतज़ार रहेगा!",
+    whatsappFrom: "इस पेज से भेजा गया",
   },
   theme: { toggle: "थीम बदलें" },
   notFound: {

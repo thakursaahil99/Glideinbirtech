@@ -7,7 +7,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { ConversionTracker } from "@/components/analytics/ConversionTracker";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
-import { whatsappLink } from "@/lib/site";
+import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 
 export async function generateMetadata({
   params,
@@ -52,14 +52,13 @@ export default async function ThankYouPage({
         lede={ty.text}
       >
         <div className="mt-10 flex flex-wrap gap-3">
-          <a
-            href={whatsappLink(dict.cta.whatsappMessage)}
-            target="_blank"
-            rel="noopener noreferrer"
+          <WhatsAppLink
+            message={dict.cta.whatsappMessage}
+            from={dict.cta.whatsappFrom}
             className={buttonClass({ size: "lg" })}
           >
             <MessageCircle className="h-4 w-4" /> {ty.whatsapp}
-          </a>
+          </WhatsAppLink>
           <Link href={`/${typed}`} className={buttonClass({ variant: "outline", size: "lg" })}>
             {ty.home} <ArrowSlide />
           </Link>

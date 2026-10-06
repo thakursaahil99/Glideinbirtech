@@ -15,7 +15,8 @@ import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { ArrowSlide, buttonClass } from "@/components/ui/Button";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { getLenis } from "@/components/motion/SmoothScroll";
-import { siteConfig, whatsappLink } from "@/lib/site";
+import { siteConfig, whatsappDisplay } from "@/lib/site";
+import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
@@ -220,9 +221,9 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               </div>
               <div className="flex flex-col gap-1 text-sm text-muted">
                 <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-                <a href={whatsappLink(dict.cta.whatsappMessage)} target="_blank" rel="noopener noreferrer">
-                  WhatsApp · {siteConfig.phone}
-                </a>
+                <WhatsAppLink message={dict.cta.whatsappMessage} from={dict.cta.whatsappFrom}>
+                  WhatsApp · {whatsappDisplay()}
+                </WhatsAppLink>
               </div>
               <Link href={`${base}/contact`} className={buttonClass({ size: "lg", className: "w-full" })}>
                 {dict.nav.cta} <ArrowSlide />

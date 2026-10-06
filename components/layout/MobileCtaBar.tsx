@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { MessageCircle, Phone, Send } from "lucide-react";
-import { telLink, whatsappLink } from "@/lib/site";
+import { telLink } from "@/lib/site";
+import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import { trackContactClick } from "@/lib/track";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
@@ -18,16 +19,14 @@ export function MobileCtaBar({ locale, dict }: { locale: Locale; dict: Dictionar
           <Phone className="h-4 w-4" />
           {dict.cta.call}
         </a>
-        <a
-          href={whatsappLink(dict.cta.whatsappMessage)}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => trackContactClick("whatsapp")}
+        <WhatsAppLink
+          message={dict.cta.whatsappMessage}
+          from={dict.cta.whatsappFrom}
           className="flex items-center justify-center gap-1.5 rounded-full py-2.5 text-foreground"
         >
           <MessageCircle className="h-4 w-4 text-[#25D366]" />
           {dict.cta.whatsapp}
-        </a>
+        </WhatsAppLink>
         <Link
           href={`/${locale}/contact`}
           className="flex items-center justify-center gap-1.5 rounded-full bg-[image:var(--sunset)] py-2.5 text-white"

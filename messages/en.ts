@@ -201,7 +201,9 @@ export const en = {
     quote: "Start a project",
     call: "Call",
     whatsapp: "WhatsApp",
-    whatsappMessage: "Hi Sahil, I'd like to talk about a project.",
+    whatsappMessage:
+      "Hi Sahil! 👋\n\nI found your website *Glideinbir Tech* and I'd like to discuss a project.\n\n• Name:\n• What I need:\n• Rough budget:\n\nLooking forward to hearing from you!",
+    whatsappFrom: "Sent from",
   },
   theme: { toggle: "Toggle theme" },
   notFound: {

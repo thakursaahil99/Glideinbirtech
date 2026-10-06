@@ -6,7 +6,8 @@ import { Magnetic } from "@/components/motion/Magnetic";
 import { Parallax } from "@/components/motion/Parallax";
 import { LocalTime, BackToTop } from "@/components/layout/FooterBits";
 import { services, serviceTitle } from "@/content/services";
-import { siteConfig, telLink, whatsappLink } from "@/lib/site";
+import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
+import { siteConfig, telLink, whatsappDisplay } from "@/lib/site";
 import { t, type Dictionary, type Locale } from "@/lib/i18n";
 
 export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
@@ -97,9 +98,14 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             <FooterLink href={`mailto:${siteConfig.email}`} external>
               {siteConfig.email}
             </FooterLink>
-            <FooterLink href={whatsappLink(dict.cta.whatsappMessage)} external>
-              WhatsApp
-            </FooterLink>
+            <WhatsAppLink
+              message={dict.cta.whatsappMessage}
+              from={dict.cta.whatsappFrom}
+              className="group/fl relative w-fit text-[0.95rem] text-foreground/80 transition-colors hover:text-foreground"
+            >
+              WhatsApp · {whatsappDisplay()}
+              <span className="absolute -bottom-0.5 left-0 h-px w-full origin-right scale-x-0 bg-[image:var(--sunset)] transition-transform duration-500 group-hover/fl:origin-left group-hover/fl:scale-x-100" />
+            </WhatsAppLink>
             <FooterLink href={telLink()} external>
               {siteConfig.phone}
             </FooterLink>

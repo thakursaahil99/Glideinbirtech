@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Plus } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { faqs } from "@/content/faq";
-import { whatsappLink } from "@/lib/site";
+import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import { ArrowSlide, buttonClass } from "@/components/ui/Button";
 import { t, type Dictionary, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -23,14 +23,13 @@ export function Faq({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             title={dict.faq.heading}
             subtitle={dict.faq.subheading}
           />
-          <a
-            href={whatsappLink(dict.cta.whatsappMessage)}
-            target="_blank"
-            rel="noopener noreferrer"
+          <WhatsAppLink
+            message={dict.cta.whatsappMessage}
+            from={dict.cta.whatsappFrom}
             className={buttonClass({ variant: "outline", className: "mt-8" })}
           >
             WhatsApp <ArrowSlide />
-          </a>
+          </WhatsAppLink>
         </div>
 
         <div className="border-t border-[var(--border)]">

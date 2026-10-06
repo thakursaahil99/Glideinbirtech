@@ -3,17 +3,18 @@ import { Section } from "@/components/ui/Section";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { Reveal } from "@/components/motion/Reveal";
 import { SplitText } from "@/components/motion/SplitText";
-import { siteConfig, telLink, whatsappLink } from "@/lib/site";
+import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
+import { siteConfig, telLink, whatsappDisplay } from "@/lib/site";
 import { t, type Dictionary, type Locale } from "@/lib/i18n";
 
 export function FinalCta({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const channels = [
     {
-      href: whatsappLink(dict.cta.whatsappMessage),
+      href: "",
+      whatsapp: true,
       icon: <MessageCircle className="h-4 w-4 text-[#25D366]" />,
       label: "WhatsApp",
-      value: siteConfig.phone,
-      external: true,
+      value: whatsappDisplay(),
     },
     { href: telLink(), icon: <Phone className="h-4 w-4" />, label: dict.cta.call, value: siteConfig.phone },
     {
@@ -47,22 +48,30 @@ export function FinalCta({ locale, dict }: { locale: Locale; dict: Dictionary })
               </p>
 
               <div className="mt-auto grid gap-2 pt-10">
-                {channels.map((c) => (
-                  <a
-                    key={c.label}
-                    href={c.href}
-                    {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="group flex items-center justify-between gap-4 rounded-2xl border border-background/15 px-5 py-4 transition-colors hover:border-background/40 hover:bg-background/5"
-                  >
-                    <span className="flex items-center gap-3 text-sm">
-                      {c.icon}
-                      <span className="text-background/60">{c.label}</span>
-                    </span>
-                    <span className="truncate text-sm font-medium transition-transform duration-300 group-hover:-translate-x-1">
-                      {c.value}
-                    </span>
-                  </a>
-                ))}
+                {channels.map((c) => {
+                  const cls =
+                    "group flex items-center justify-between gap-4 rounded-2xl border border-background/15 px-5 py-4 transition-colors hover:border-background/40 hover:bg-background/5";
+                  const inner = (
+                    <>
+                      <span className="flex items-center gap-3 text-sm">
+                        {c.icon}
+                        <span className="text-background/60">{c.label}</span>
+                      </span>
+                      <span className="truncate text-sm font-medium transition-transform duration-300 group-hover:-translate-x-1">
+                        {c.value}
+                      </span>
+                    </>
+                  );
+                  return c.whatsapp ? (
+                    <WhatsAppLink key={c.label} message={dict.cta.whatsappMessage} from={dict.cta.whatsappFrom} className={cls}>
+                      {inner}
+                    </WhatsAppLink>
+                  ) : (
+                    <a key={c.label} href={c.href} className={cls}>
+                      {inner}
+                    </a>
+                  );
+                })}
               </div>
             </div>
 

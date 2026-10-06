@@ -128,6 +128,39 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "glideinbir-vos",
+    name: "Glideinbir VOS",
+    year: "2026",
+    category: { en: "SaaS · Workshop management", hi: "SaaS · वर्कशॉप मैनेजमेंट" },
+    role: "Full-Stack Developer",
+    summary: {
+      en: "A Vehicle Operating System for service workshops — online bookings, job cards, spare-parts stock, GST invoices and payments for cars, bikes, scooters and EVs, with customers updated at every step.",
+      hi: "सर्विस वर्कशॉप के लिए व्हीकल ऑपरेटिंग सिस्टम — ऑनलाइन बुकिंग, जॉब कार्ड, स्पेयर-पार्ट्स स्टॉक, GST इनवॉइस और पेमेंट; कार, बाइक, स्कूटर और EV के लिए, हर कदम पर कस्टमर को अपडेट के साथ।",
+    },
+    result: {
+      en: "Replace the register, the WhatsApp follow-ups and the parts diary with one dashboard — no double-booked bays, no missed approvals.",
+      hi: "रजिस्टर, WhatsApp फ़ॉलो-अप और पार्ट्स की डायरी की जगह एक डैशबोर्ड — न डबल-बुक बे, न छूटी हुई मंज़ूरी।",
+    },
+    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Python API", "Celery"],
+    image: "/work/glideinbir-vos/cover-0.png",
+    gallery: ["/work/glideinbir-vos/register.png"],
+    accent: "#6366f1",
+    url: "https://glideinbir-vos.vercel.app",
+    featured: true,
+    challenge:
+      "Most vehicle workshops still run on a paper register and phone calls. Bays get double-booked, extra work is done without a clear customer OK, parts run out unnoticed, and the customer has to keep calling to ask whether the vehicle is ready.",
+    solution:
+      "A multi-tenant platform where every workshop (agency) gets its own isolated space. Customers add their vehicles, compare workshops and book a live time slot; the workshop checks the vehicle in, opens a job card, assigns a technician and bay, logs parts and asks the customer to approve any extra work. Completing the job generates the invoice automatically and tells the customer the vehicle is ready. A Super Admin approves agencies and every sensitive action lands in an audit log.",
+    highlights: [
+      "Live slot booking with an availability engine that never double-books a bay or technician",
+      "Digital job cards — check-in inspection, before / after photos, parts used and live progress",
+      "Extra-work approvals sent to the customer before any additional work starts",
+      "Spare-parts inventory with stock movements, re-order alerts and vendors",
+      "Automatic GST invoices, online payments, receipts and refunds",
+      "Customer, workshop staff and Super Admin dashboards with role permissions and audit logs",
+    ],
+  },
+  {
     slug: "pahadibhai",
     name: "Pahadibhai",
     year: "2025",

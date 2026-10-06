@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { Languages } from "lucide-react";
+import { motion } from "motion/react";
 import { type Locale, locales } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
@@ -23,8 +23,7 @@ export function LangToggle({ locale }: { locale: Locale }) {
   }
 
   return (
-    <div className="inline-flex items-center rounded-lg border border-[var(--border)] bg-[var(--surface)] p-0.5 text-sm">
-      <Languages className="mx-1.5 h-4 w-4 text-muted" aria-hidden="true" />
+    <div className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)]/70 p-1 text-xs">
       {locales.map((l) => (
         <button
           key={l}
@@ -32,13 +31,18 @@ export function LangToggle({ locale }: { locale: Locale }) {
           onClick={() => switchTo(l)}
           aria-pressed={l === locale}
           className={cn(
-            "rounded-md px-2 py-1 font-medium transition-colors",
-            l === locale
-              ? "bg-[var(--primary)] text-[var(--primary-foreground)]"
-              : "text-muted hover:text-foreground",
+            "relative rounded-full px-2.5 py-1 font-semibold tracking-wide transition-colors",
+            l === locale ? "text-background" : "text-muted hover:text-foreground",
           )}
         >
-          {l.toUpperCase()}
+          {l === locale ? (
+            <motion.span
+              layoutId={`lang-pill`}
+              className="absolute inset-0 rounded-full bg-foreground"
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+            />
+          ) : null}
+          <span className="relative">{l === "hi" ? "हि" : "EN"}</span>
         </button>
       ))}
     </div>

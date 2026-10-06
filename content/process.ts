@@ -9,7 +9,7 @@ export type ProcessStep = {
 export const processSteps: ProcessStep[] = [
   {
     step: "01",
-    title: { en: "Understand", hi: "समझना" },
+    title: { en: "Discover", hi: "खोज" },
     text: {
       en: "Get into the business logic, the data model and the users before writing anything. A free call turns your idea into a written scope, timeline and fixed quote.",
       hi: "कुछ लिखने से पहले बिज़नेस लॉजिक, डेटा मॉडल और यूज़र को समझना। एक फ्री कॉल आपके आइडिया को लिखित स्कोप, समय-सीमा और तय कोटेशन में बदल देती है।",
@@ -17,7 +17,7 @@ export const processSteps: ProcessStep[] = [
   },
   {
     step: "02",
-    title: { en: "Architect", hi: "आर्किटेक्चर" },
+    title: { en: "Design", hi: "डिज़ाइन" },
     text: {
       en: "Decide the boundaries — modules, APIs, caching, where state lives. Cheap to change now, expensive later. You approve a clickable design first.",
       hi: "सीमाएँ तय करना — मॉड्यूल, API, कैशिंग, स्टेट कहाँ रहेगा। अभी बदलना सस्ता, बाद में महँगा। पहले आप एक क्लिक करने योग्य डिज़ाइन मंज़ूर करते हैं।",
@@ -33,7 +33,7 @@ export const processSteps: ProcessStep[] = [
   },
   {
     step: "04",
-    title: { en: "Harden & grow", hi: "मज़बूत करना और बढ़ाना" },
+    title: { en: "Launch & grow", hi: "लॉन्च और ग्रोथ" },
     text: {
       en: "Performance budgets, edge cases, SEO, analytics and monitoring. Then a handover with docs a future developer can use — plus optional SEO and Google Ads to keep results growing.",
       hi: "परफ़ॉर्मेंस बजट, एज केस, SEO, एनालिटिक्स और मॉनिटरिंग। फिर ऐसे डॉक्स के साथ हैंडओवर जो कोई भी डेवलपर इस्तेमाल कर सके — और नतीजे बढ़ाने के लिए वैकल्पिक SEO व Google Ads।",

@@ -10,7 +10,7 @@ export function WhatsappFab({ message }: { message: string }) {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 500);
+    const onScroll = () => setShow(window.scrollY > 600);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -24,11 +24,12 @@ export function WhatsappFab({ message }: { message: string }) {
       onClick={() => trackContactClick("whatsapp")}
       aria-label="WhatsApp"
       className={cn(
-        "fixed bottom-20 right-4 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/20 transition-all hover:scale-105 sm:bottom-6",
-        show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0",
+        "group fixed bottom-6 right-6 z-40 hidden h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_16px_40px_-12px_rgba(37,211,102,0.7)] transition-all duration-500 hover:scale-110 sm:inline-flex",
+        show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0",
       )}
     >
-      <MessageCircle className="h-6 w-6" />
+      <span className="absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-30 [animation-duration:2.4s]" />
+      <MessageCircle className="relative h-6 w-6 transition-transform duration-500 group-hover:rotate-12" />
     </a>
   );
 }

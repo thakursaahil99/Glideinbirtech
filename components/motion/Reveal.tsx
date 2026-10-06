@@ -6,12 +6,14 @@ import { motion, useReducedMotion, type Variants } from "motion/react";
 type Direction = "up" | "down" | "left" | "right" | "none";
 
 const offset: Record<Direction, { x?: number; y?: number }> = {
-  up: { y: 24 },
-  down: { y: -24 },
-  left: { x: 24 },
-  right: { x: -24 },
+  up: { y: 36 },
+  down: { y: -36 },
+  left: { x: 36 },
+  right: { x: -36 },
   none: {},
 };
+
+const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Reveal({
   children,
@@ -32,12 +34,13 @@ export function Reveal({
   const MotionTag = motion[as];
 
   const variants: Variants = {
-    hidden: { opacity: 0, ...offset[direction] },
+    hidden: { opacity: 0, filter: "blur(8px)", ...offset[direction] },
     show: {
       opacity: 1,
       x: 0,
       y: 0,
-      transition: { duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] },
+      filter: "blur(0px)",
+      transition: { duration: 0.9, delay, ease },
     },
   };
 
@@ -49,7 +52,7 @@ export function Reveal({
       variants={variants}
       initial="hidden"
       whileInView="show"
-      viewport={{ once, margin: "-10% 0px -10% 0px" }}
+      viewport={{ once, margin: "-8% 0px -8% 0px" }}
     >
       {children}
     </MotionTag>
@@ -94,8 +97,14 @@ export function RevealItem({
     <motion.div
       className={className}
       variants={{
-        hidden: { opacity: 0, y: 20 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+        hidden: { opacity: 0, y: 40, scale: 0.97, filter: "blur(6px)" },
+        show: {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: "blur(0px)",
+          transition: { duration: 0.85, ease },
+        },
       }}
     >
       {children}

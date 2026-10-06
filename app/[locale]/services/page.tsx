@@ -5,6 +5,9 @@ import { Process } from "@/components/sections/Process";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { PageHero } from "@/components/sections/PageHero";
+import { VelocityMarquee } from "@/components/motion/Marquee";
+import { services } from "@/content/services";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
 
@@ -33,9 +36,19 @@ export default async function ServicesPage({
   if (!isLocale(locale)) notFound();
   const typed = locale as Locale;
   const dict = getDictionary(typed);
+  const techs = Array.from(new Set(services.flatMap((s) => s.tech)));
 
   return (
     <>
+      <PageHero
+        image="/about/glide-snow.jpg"
+        eyebrow={<p className="eyebrow">{dict.services.eyebrow} · {services.length}</p>}
+        title={dict.services.pageHeading}
+        lede={dict.services.subheading}
+      />
+      <div className="mb-20 border-y border-[var(--border)] py-5">
+        <VelocityMarquee items={techs} baseVelocity={-1.5} className="font-display text-3xl font-semibold tracking-tight sm:text-5xl" />
+      </div>
       <Services locale={typed} dict={dict} variant="page" />
       <Process locale={typed} dict={dict} />
       <Pricing locale={typed} dict={dict} />

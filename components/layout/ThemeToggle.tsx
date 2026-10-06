@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 import { Moon, Sun } from "lucide-react";
 
 type Theme = "light" | "dark";
@@ -25,8 +26,7 @@ export function ThemeToggle({ label }: { label: string }) {
     setTheme(current);
   }, []);
 
-  function toggle() {
-    const next: Theme = theme === "dark" ? "light" : "dark";
+  function apply(next: Theme) {
     setTheme(next);
     document.documentElement.setAttribute("data-theme", next);
     try {
@@ -36,15 +36,34 @@ export function ThemeToggle({ label }: { label: string }) {
     }
   }
 
+  function toggle() {
+    const next: Theme = theme === "dark" ? "light" : "dark";
+    // circular wipe from the button where the browser supports it
+    const doc = document as Document & { startViewTransition?: (cb: () => void) => unknown };
+    if (doc.startViewTransition && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      doc.startViewTransition(() => apply(next));
+    } else {
+      apply(next);
+    }
+  }
+
   return (
     <button
       type="button"
       onClick={toggle}
       aria-label={label}
       title={label}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--surface)] text-foreground hover:border-[var(--primary)]"
+      className="relative inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-[var(--border)] bg-[var(--surface)]/70 text-foreground transition-colors hover:border-[var(--primary)]"
     >
-      {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      <motion.span
+        key={theme ?? "none"}
+        className="flex"
+        initial={theme ? { y: 14, rotate: -90, opacity: 0 } : false}
+        animate={{ y: 0, rotate: 0, opacity: 1 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      </motion.span>
     </button>
   );
 }

@@ -1,19 +1,22 @@
+import { ViewTransition } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Check, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, ExternalLink } from "lucide-react";
 import { Section } from "@/components/ui/Section";
-import { Reveal } from "@/components/motion/Reveal";
+import { buttonClass } from "@/components/ui/Button";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import { ParallaxMedia } from "@/components/motion/Parallax";
+import { Magnetic } from "@/components/motion/Magnetic";
+import { PageHero } from "@/components/sections/PageHero";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { projects, getProject } from "@/content/projects";
 import { getDictionary, isLocale, locales, t, type Locale } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
-  return locales.flatMap((locale) =>
-    projects.map((p) => ({ locale, slug: p.slug })),
-  );
+  return locales.flatMap((locale) => projects.map((p) => ({ locale, slug: p.slug })));
 }
 
 export async function generateMetadata({
@@ -48,133 +51,170 @@ export default async function CaseStudyPage({
   const idx = projects.findIndex((p) => p.slug === slug);
   const next = projects[(idx + 1) % projects.length];
 
+  const meta = [
+    { label: dict.work.year, value: project.year },
+    { label: dict.work.role, value: project.role },
+    { label: dict.work.builtWith, value: project.tech.join(" · ") },
+  ];
+
   return (
-    <>
-      <article>
-        <Section size="lg" className="relative overflow-hidden pb-0">
-          <div
-            className="hero-glow pointer-events-none absolute inset-0 -z-10 opacity-50"
-            style={{ ["--glow-a" as string]: `${project.accent}44` }}
-          />
-          <Link
-            href={`/${typed}/work`}
-            className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" /> {dict.work.backToWork}
-          </Link>
-          <Reveal className="mt-6">
-            <p
-              className="text-sm font-medium uppercase tracking-widest"
-              style={{ color: project.accent }}
-            >
-              {t(project.category, typed)}
-            </p>
-            <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl">
-              {project.name}
-            </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted text-pretty">
-              {t(project.summary, typed)}
-            </p>
-          </Reveal>
-
-          <Reveal className="mt-8" delay={0.1}>
-            <dl className="flex flex-wrap gap-x-10 gap-y-4 border-y border-[var(--border)] py-5 text-sm">
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-muted">{dict.work.year}</dt>
-                <dd className="mt-0.5 font-medium">{project.year}</dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-muted">{dict.work.role}</dt>
-                <dd className="mt-0.5 font-medium">{project.role}</dd>
-              </div>
-              <div className="min-w-0">
-                <dt className="text-xs uppercase tracking-wider text-muted">{dict.work.builtWith}</dt>
-                <dd className="mt-0.5 font-medium">{project.tech.join(" · ")}</dd>
-              </div>
-              {project.url ? (
-                <div>
-                  <dt className="text-xs uppercase tracking-wider text-muted">{dict.work.liveSite}</dt>
-                  <dd className="mt-0.5">
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 font-medium text-[var(--primary)]"
-                    >
-                      {new URL(project.url).host} <ExternalLink className="h-3.5 w-3.5" />
-                    </a>
-                  </dd>
-                </div>
-              ) : null}
-            </dl>
-          </Reveal>
-        </Section>
-
-        <Section size="sm">
-          <Reveal>
-            <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-[var(--border)]">
-              <Image
-                src={project.image}
-                alt={project.name}
-                fill
-                sizes="(max-width: 1024px) 100vw, 1024px"
-                className="object-cover"
-                priority
-              />
+    <ViewTransition key={slug} enter="page-in" exit="page-out" default="none">
+      <article style={{ ["--card-accent" as string]: project.accent }}>
+        <PageHero
+          eyebrow={
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href={`/${typed}/work`}
+                className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
+              >
+                <ArrowLeft className="h-4 w-4" /> {dict.work.backToWork}
+              </Link>
+              <span
+                className="rounded-full px-3 py-1 text-xs font-semibold text-white"
+                style={{ backgroundColor: project.accent }}
+              >
+                {t(project.category, typed)}
+              </span>
             </div>
-          </Reveal>
+          }
+          title={project.name}
+          lede={t(project.summary, typed)}
+          aside={
+            project.url ? (
+              <Magnetic>
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonClass({ size: "lg" })}
+                >
+                  {dict.work.liveSite} <ExternalLink className="h-4 w-4" />
+                </a>
+              </Magnetic>
+            ) : undefined
+          }
+        >
+          <dl className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--border)] sm:grid-cols-3">
+            {meta.map((m) => (
+              <div key={m.label} className="bg-[var(--surface)]/85 p-5 backdrop-blur">
+                <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
+                  {m.label}
+                </dt>
+                <dd className="mt-2 font-medium">{m.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </PageHero>
+
+        {/* hero image — morphs from the card that was clicked */}
+        <Section size="sm" className="pt-0">
+          <div className="relative">
+            <div
+              className="absolute -inset-10 -z-10 rounded-[4rem] opacity-30 blur-3xl"
+              style={{ backgroundColor: project.accent }}
+            />
+            <ParallaxMedia
+              amount={6}
+              className="aspect-[16/10] rounded-[2rem] border border-[var(--border)] bg-[var(--surface-2)] sm:aspect-[16/9]"
+            >
+              <ViewTransition name={`project-${project.slug}`} share="morph" default="none">
+                <Image
+                  src={project.image}
+                  alt={project.name}
+                  fill
+                  sizes="(max-width: 1280px) 100vw, 1280px"
+                  className="object-cover object-top"
+                  priority
+                />
+              </ViewTransition>
+            </ParallaxMedia>
+          </div>
         </Section>
 
         <Section size="sm" className="pt-0">
-          <div className="grid gap-12 lg:grid-cols-2">
-            <Reveal>
-              <h2 className="font-display text-2xl font-semibold">{dict.work.theChallenge}</h2>
-              <p className="mt-4 leading-relaxed text-muted text-pretty">{project.challenge}</p>
+          <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr]">
+            <Reveal className="lg:sticky lg:top-32 lg:self-start">
+              <p className="eyebrow mb-4">{dict.work.theChallenge}</p>
+              <p className="font-display text-2xl font-medium leading-snug tracking-tight sm:text-3xl">
+                {project.challenge}
+              </p>
             </Reveal>
-            <Reveal delay={0.08}>
-              <h2 className="font-display text-2xl font-semibold">{dict.work.theSolution}</h2>
-              <p className="mt-4 leading-relaxed text-muted text-pretty">{project.solution}</p>
-            </Reveal>
+            <div>
+              <Reveal>
+                <p className="eyebrow mb-4">{dict.work.theSolution}</p>
+                <p className="text-lg leading-relaxed text-muted text-pretty">{project.solution}</p>
+              </Reveal>
+              <Reveal className="mt-12">
+                <p className="eyebrow mb-6">{dict.work.highlights}</p>
+              </Reveal>
+              <RevealGroup className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
+                {project.highlights.map((hl, i) => (
+                  <RevealItem key={hl}>
+                    <div className="flex items-baseline gap-5 py-5">
+                      <span className="text-xs font-medium tabular-nums" style={{ color: project.accent }}>
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="font-display text-lg font-medium">{hl}</span>
+                    </div>
+                  </RevealItem>
+                ))}
+              </RevealGroup>
+            </div>
           </div>
-
-          <Reveal className="mt-12">
-            <h2 className="font-display text-2xl font-semibold">{dict.work.highlights}</h2>
-            <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-              {project.highlights.map((hl) => (
-                <li
-                  key={hl}
-                  className="flex gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4"
-                >
-                  <Check
-                    className="mt-0.5 h-4 w-4 shrink-0"
-                    style={{ color: project.accent }}
-                  />
-                  <span className="text-sm text-muted">{hl}</span>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
         </Section>
 
-        <Section size="sm" className="border-t border-[var(--border)]">
-          <Link
-            href={`/${typed}/work/${next.slug}`}
-            className="group flex items-center justify-between gap-6"
-          >
+        {project.gallery?.length ? (
+          <Section size="sm" className="pt-0">
+            <div className="grid gap-6 md:grid-cols-2">
+              {project.gallery.map((src, i) => (
+                <Reveal
+                  key={src}
+                  delay={i * 0.08}
+                  className={project.gallery!.length % 2 === 1 && i === 0 ? "md:col-span-2" : undefined}
+                >
+                  <ParallaxMedia
+                    amount={5}
+                    className="aspect-[16/10] rounded-[1.75rem] border border-[var(--border)] bg-[var(--surface-2)]"
+                  >
+                    <Image
+                      src={src}
+                      alt={`${project.name} — screen ${i + 2}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover object-top"
+                    />
+                  </ParallaxMedia>
+                </Reveal>
+              ))}
+            </div>
+          </Section>
+        ) : null}
+
+        {/* next project */}
+        <Link
+          href={`/${typed}/work/${next.slug}`}
+          data-cursor={dict.work.nextProject}
+          className="group relative block overflow-hidden border-t border-[var(--border)]"
+        >
+          <div className="absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100">
+            <Image src={next.image} alt="" fill sizes="100vw" className="object-cover object-top opacity-25 blur-sm" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)] to-transparent" />
+          </div>
+          <div className="relative mx-auto flex max-w-7xl items-end justify-between gap-6 py-20 container-px sm:py-28">
             <div>
-              <p className="text-xs uppercase tracking-widest text-muted">
-                {dict.work.nextProject}
-              </p>
-              <p className="mt-1 font-display text-2xl font-semibold group-hover:text-[var(--primary)] sm:text-3xl">
+              <p className="eyebrow">{dict.work.nextProject}</p>
+              <p className="mt-4 font-display text-5xl font-semibold tracking-tight transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-4 sm:text-7xl lg:text-8xl">
                 {next.name}
               </p>
             </div>
-            <ArrowRight className="h-6 w-6 shrink-0 text-muted transition-transform group-hover:translate-x-1" />
-          </Link>
-        </Section>
+            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-foreground text-background transition-transform duration-500 group-hover:rotate-45 sm:h-20 sm:w-20">
+              <ArrowUpRight className="h-7 w-7" />
+            </span>
+          </div>
+        </Link>
       </article>
 
       <FinalCta locale={typed} dict={dict} />
-    </>
+    </ViewTransition>
   );
 }

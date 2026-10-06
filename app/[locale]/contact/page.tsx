@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { LeadForm } from "@/components/forms/LeadForm";
+import { Reveal } from "@/components/motion/Reveal";
+import { Spotlight } from "@/components/motion/Spotlight";
+import { PageHero } from "@/components/sections/PageHero";
+import { LocalTime } from "@/components/layout/FooterBits";
 import { OrganizationJsonLd } from "@/components/seo/JsonLd";
 import { getDictionary, isLocale, t, type Locale } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
@@ -35,58 +40,102 @@ export default async function ContactPage({
   const dict = getDictionary(typed);
   const c = dict.contactPage;
 
+  const channels = [
+    {
+      href: whatsappLink(dict.cta.whatsappMessage),
+      icon: MessageCircle,
+      color: "#25D366",
+      label: c.whatsappLabel,
+      value: siteConfig.phone,
+      external: true,
+    },
+    { href: telLink(), icon: Phone, color: "var(--primary)", label: c.phoneLabel, value: siteConfig.phone },
+    {
+      href: `mailto:${siteConfig.email}`,
+      icon: Mail,
+      color: "var(--accent)",
+      label: c.emailLabel,
+      value: siteConfig.email,
+    },
+  ];
+
   return (
-    <Section size="lg" className="relative overflow-hidden">
-      <div className="hero-glow pointer-events-none absolute inset-0 -z-10 opacity-70" />
+    <>
       <OrganizationJsonLd locale={typed} />
-      <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-        <div>
-          <p className="eyebrow mb-4">{c.title}</p>
-          <h1 className="font-display text-[2rem] font-semibold leading-[1.1] text-balance sm:text-4xl lg:text-5xl">
-            {c.heading}
-          </h1>
-          <p className="mt-5 text-base leading-relaxed text-muted text-pretty sm:text-lg">
-            {c.subheading}
+      <PageHero
+        image="/about/glide-red.jpg"
+        eyebrow={
+          <p className="eyebrow">
+            {c.title}
+            <span className="normal-case tracking-normal text-[#16a34a]">
+              {t(siteConfig.responseTime, typed)}
+            </span>
           </p>
-          <p className="mt-4 text-sm font-medium text-[var(--accent)]">
-            {t(siteConfig.responseTime, typed)}
-          </p>
+        }
+        title={c.heading}
+        lede={c.subheading}
+      />
 
-          <h2 className="mt-10 text-xs font-semibold uppercase tracking-widest text-muted">
-            {c.directTitle}
-          </h2>
-          <div className="mt-4 space-y-3 text-sm">
-            <a
-              href={whatsappLink(dict.cta.whatsappMessage)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 hover:text-[var(--primary)]"
-            >
-              <MessageCircle className="h-4 w-4 text-[#25D366]" />
-              <span>{c.whatsappLabel}: {siteConfig.phone}</span>
-            </a>
-            <a href={telLink()} className="flex items-center gap-3 hover:text-[var(--primary)]">
-              <Phone className="h-4 w-4" />
-              <span>{c.phoneLabel}: {siteConfig.phone}</span>
-            </a>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="flex items-center gap-3 hover:text-[var(--primary)]"
-            >
-              <Mail className="h-4 w-4" />
-              <span>{c.emailLabel}: {siteConfig.email}</span>
-            </a>
-            <p className="flex items-center gap-3 text-muted">
-              <MapPin className="h-4 w-4" />
-              <span>{c.locationLabel}: {siteConfig.location}</span>
-            </p>
+      <Section size="sm" className="pt-0">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+          <div className="space-y-4">
+            {channels.map((ch, i) => {
+              const Icon = ch.icon;
+              return (
+                <Reveal key={ch.label} delay={i * 0.06}>
+                  <Spotlight className="rounded-[1.5rem]">
+                    <a
+                      href={ch.href}
+                      {...(ch.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      className="group flex items-center gap-5 rounded-[1.5rem] border border-[var(--border)] bg-[var(--surface)] p-5 sm:p-6"
+                    >
+                      <span
+                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-white"
+                        style={{ background: ch.color }}
+                      >
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-xs font-medium uppercase tracking-widest text-muted">
+                          {ch.label}
+                        </span>
+                        <span className="mt-1 block truncate font-display text-lg font-semibold sm:text-xl">
+                          {ch.value}
+                        </span>
+                      </span>
+                      <ArrowUpRight className="h-5 w-5 shrink-0 text-muted transition-all duration-500 group-hover:rotate-45 group-hover:text-foreground" />
+                    </a>
+                  </Spotlight>
+                </Reveal>
+              );
+            })}
+
+            <Reveal delay={0.2}>
+              <div className="group relative flex min-h-[18rem] flex-col justify-end overflow-hidden rounded-[1.5rem] border border-[var(--border)] p-6 text-white">
+                <Image
+                  src="/about/landing.jpg"
+                  alt="Evening at the Bir Billing landing site"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 560px"
+                  className="object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+                <p className="relative flex items-center gap-2 text-xs uppercase tracking-widest text-white/70">
+                  <MapPin className="h-3.5 w-3.5" /> {c.locationLabel}
+                </p>
+                <p className="relative mt-2 font-display text-2xl font-semibold">{siteConfig.location}</p>
+                <LocalTime className="relative mt-1 block text-sm tabular-nums text-white/75" />
+              </div>
+            </Reveal>
           </div>
-        </div>
 
-        <div className="surface-card p-6 sm:p-8">
-          <LeadForm locale={typed} dict={dict} />
+          <Reveal delay={0.1}>
+            <div className="rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6 shadow-[var(--card-shadow)] sm:p-9">
+              <LeadForm locale={typed} dict={dict} />
+            </div>
+          </Reveal>
         </div>
-      </div>
-    </Section>
+      </Section>
+    </>
   );
 }

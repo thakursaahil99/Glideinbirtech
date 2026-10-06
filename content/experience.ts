@@ -39,19 +39,19 @@ export const experience: Role[] = [
 
 export const principles: Bilingual[] = [
   {
-    en: "Performance is a feature, not a phase.",
-    hi: "परफ़ॉर्मेंस एक फ़ीचर है, कोई आख़िरी स्टेप नहीं।",
+    en: "Speed is a feature — performance is designed in, not bolted on.",
+    hi: "स्पीड एक फ़ीचर है — परफ़ॉर्मेंस शुरू से डिज़ाइन होती है, बाद में जोड़ी नहीं जाती।",
   },
   {
-    en: "Customize without forking — clean extension points over overrides.",
-    hi: "फ़ोर्क किए बिना कस्टमाइज़ करो — ओवरराइड से बेहतर साफ़ एक्सटेंशन पॉइंट।",
+    en: "Real over demo — every feature works end to end, in production.",
+    hi: "डेमो नहीं, असली — हर फ़ीचर शुरू से आख़िर तक, प्रोडक्शन में काम करे।",
   },
   {
-    en: "A design system beats one-off pages every time.",
-    hi: "डिज़ाइन सिस्टम हमेशा अलग-अलग बने पेजों से बेहतर होता है।",
+    en: "Motion with meaning — animation guides attention, never decorates.",
+    hi: "मतलब वाला मोशन — एनीमेशन ध्यान दिखाए, सिर्फ़ सजावट न करे।",
   },
   {
-    en: "If it can't be demoed, it isn't done.",
-    hi: "अगर डेमो नहीं दिखा सकते, तो वो पूरा नहीं हुआ।",
+    en: "Own the whole stack — from the database schema to the last micro-interaction.",
+    hi: "पूरा स्टैक अपना — डेटाबेस स्कीमा से आख़िरी माइक्रो-इंटरैक्शन तक।",
   },
 ];

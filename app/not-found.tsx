@@ -6,19 +6,20 @@ const bootScript = `(function(){var d=document.documentElement;d.classList.remov
 export default function NotFound() {
   return (
     <html lang="en" className="no-js">
-      <body className="flex min-h-screen items-center justify-center bg-[var(--background)] p-6 text-[var(--foreground)] antialiased">
+      <body className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[var(--background)] p-6 text-[var(--foreground)] antialiased">
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
-        <div className="text-center">
-          <p className="font-mono text-sm font-medium tracking-widest text-[var(--accent)]">
+        <div className="hero-glow pointer-events-none absolute inset-0" />
+        <div className="relative text-center">
+          <p className="gradient-text text-[9rem] font-bold leading-none tracking-[-0.06em] sm:text-[13rem]">
             404
           </p>
-          <h1 className="mt-3 font-display text-3xl font-semibold">Page not found</h1>
-          <p className="mt-3 text-sm text-[var(--muted)]">
-            That page does not exist. Let&apos;s get you back on track.
+          <h1 className="mt-2 text-3xl font-semibold">Lost in the thermals</h1>
+          <p className="mt-3 text-[var(--muted)]">
+            That page does not exist. Let&apos;s get you back on the ground.
           </p>
           <Link
             href="/en"
-            className="mt-7 inline-flex h-11 items-center rounded-xl bg-[var(--primary)] px-5 text-sm font-medium text-[var(--primary-foreground)]"
+            className="mt-8 inline-flex h-12 items-center rounded-full bg-[var(--foreground)] px-7 text-sm font-medium text-[var(--background)] transition-transform hover:scale-105"
           >
             Back to home
           </Link>

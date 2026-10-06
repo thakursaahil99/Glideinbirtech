@@ -1,7 +1,10 @@
 import Link from "next/link";
-import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { LogoMark } from "@/components/Logo";
-import { buttonClass } from "@/components/ui/Button";
+import { SplitText } from "@/components/motion/SplitText";
+import { Magnetic } from "@/components/motion/Magnetic";
+import { Parallax } from "@/components/motion/Parallax";
+import { LocalTime, BackToTop } from "@/components/layout/FooterBits";
 import { services, serviceTitle } from "@/content/services";
 import { siteConfig, telLink, whatsappLink } from "@/lib/site";
 import { t, type Dictionary, type Locale } from "@/lib/i18n";
@@ -11,6 +14,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const year = new Date().getFullYear();
 
   const explore = [
+    { href: base, label: dict.nav.home },
     { href: `${base}/services`, label: dict.nav.services },
     { href: `${base}/work`, label: dict.nav.work },
     { href: `${base}/about`, label: dict.nav.about },
@@ -18,44 +22,59 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   ];
 
   return (
-    <footer className="relative overflow-hidden border-t border-[var(--border)] bg-[var(--surface)] pb-16 sm:pb-0">
-      <div className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-56 opacity-35" />
+    <footer className="relative overflow-hidden rounded-t-[2.5rem] border-t border-[var(--border)] bg-[var(--surface)] pb-20 sm:pb-0">
+      <div className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[28rem] opacity-60" />
+      <div className="grid-bg pointer-events-none absolute inset-0 opacity-30" />
 
-      <div className="relative mx-auto w-full max-w-6xl container-px">
-        {/* CTA strip */}
-        <div className="flex flex-col items-start justify-between gap-5 border-b border-[var(--border)] py-10 sm:flex-row sm:items-center">
+      <div className="relative mx-auto w-full max-w-7xl container-px">
+        {/* big CTA */}
+        <div className="grid items-end gap-10 border-b border-[var(--border)] pb-16 pt-20 sm:pt-28 lg:grid-cols-[1fr_auto]">
           <div>
-            <p className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
-              {dict.footer.ctaHeading}
-            </p>
-            <p className="mt-1.5 flex items-center gap-2 text-sm text-muted">
+            <p className="eyebrow mb-6">{dict.finalCta.heading.replace(/\*/g, "")}</p>
+            <SplitText
+              text={dict.footer.ctaHeading}
+              className="max-w-4xl font-display text-[2.8rem] font-semibold leading-[0.98] sm:text-6xl lg:text-[5.5rem]"
+            />
+            <p className="mt-6 flex items-center gap-2 text-sm text-muted">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent)] opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--accent)]" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
               </span>
               {t(siteConfig.responseTime, locale)}
             </p>
           </div>
-          <Link
-            href={`${base}/contact`}
-            className={buttonClass({ size: "lg", className: "shrink-0" })}
-          >
-            {dict.footer.getQuote} <ArrowUpRight className="h-4 w-4" />
-          </Link>
+          <Magnetic strength={0.35}>
+            <Link
+              href={`${base}/contact`}
+              data-cursor="Let's go"
+              className="group relative flex h-40 w-40 items-center justify-center overflow-hidden rounded-full bg-foreground text-center font-display text-lg font-semibold leading-tight text-background sm:h-48 sm:w-48"
+            >
+              <span className="absolute inset-0 translate-y-full rounded-full bg-[image:var(--sunset)] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0" />
+              <span className="relative flex flex-col items-center gap-2 px-6 group-hover:text-white">
+                {dict.footer.getQuote}
+                <ArrowUpRight className="h-6 w-6 transition-transform duration-500 group-hover:rotate-45" />
+              </span>
+            </Link>
+          </Magnetic>
         </div>
 
         {/* columns */}
-        <div className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.2fr]">
+        <div className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr_1.2fr]">
           <div>
             <Link href={base} className="inline-flex items-center gap-2.5">
-              <LogoMark className="h-8 w-8" />
-              <span className="font-display text-lg font-semibold tracking-tight">
-                Glideinbir<span className="text-[var(--accent)]"> Tech</span>
+              <LogoMark className="h-9 w-9" />
+              <span className="font-display text-xl font-semibold tracking-tight">
+                Glideinbir<span className="serif-accent ml-1 text-muted">tech</span>
               </span>
             </Link>
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
-              {dict.footer.tagline}
-            </p>
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">{dict.footer.tagline}</p>
+            <div className="mt-6 rounded-2xl border border-[var(--border)] bg-[var(--background)]/60 p-4">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
+                {dict.footer.localTime}
+              </p>
+              <LocalTime className="mt-1 block font-display text-2xl font-semibold tabular-nums" />
+              <p className="mt-0.5 text-xs text-muted">{siteConfig.location}</p>
+            </div>
           </div>
 
           <FooterCol title={dict.footer.exploreTitle}>
@@ -68,71 +87,46 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
 
           <FooterCol title={dict.footer.servicesTitle}>
             {services.slice(0, 6).map((s) => (
-              <FooterLink key={s.slug} href={`${base}/services`}>
+              <FooterLink key={s.slug} href={`${base}/services/${s.slug}`}>
                 {serviceTitle(s, locale)}
               </FooterLink>
             ))}
           </FooterCol>
 
           <FooterCol title={dict.footer.connectTitle}>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
-            >
-              <Mail className="h-3.5 w-3.5 shrink-0" /> {siteConfig.email}
-            </a>
-            <a
-              href={whatsappLink(dict.cta.whatsappMessage)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
-            >
-              <MessageCircle className="h-3.5 w-3.5 shrink-0" /> {siteConfig.phone}
-            </a>
-            <a
-              href={telLink()}
-              className="flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
-            >
-              <Phone className="h-3.5 w-3.5 shrink-0" /> {dict.contactPage.phoneLabel}
-            </a>
-            <p className="flex items-center gap-2 text-sm text-muted">
-              <MapPin className="h-3.5 w-3.5 shrink-0" /> {siteConfig.location}
-            </p>
-            <div className="flex gap-2 pt-1.5">
-              {[
-                { href: siteConfig.socials.github, label: "GitHub" },
-                { href: siteConfig.socials.linkedin, label: "LinkedIn" },
-              ].map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 rounded-lg border border-[var(--border)] px-2.5 py-1 text-xs text-muted transition-colors hover:border-[var(--primary)] hover:text-foreground"
-                >
-                  {s.label} <ArrowUpRight className="h-3 w-3" />
-                </a>
-              ))}
-            </div>
+            <FooterLink href={`mailto:${siteConfig.email}`} external>
+              {siteConfig.email}
+            </FooterLink>
+            <FooterLink href={whatsappLink(dict.cta.whatsappMessage)} external>
+              WhatsApp
+            </FooterLink>
+            <FooterLink href={telLink()} external>
+              {siteConfig.phone}
+            </FooterLink>
+            <FooterLink href={siteConfig.socials.github} external>
+              GitHub
+            </FooterLink>
+            <FooterLink href={siteConfig.socials.linkedin} external>
+              LinkedIn
+            </FooterLink>
           </FooterCol>
         </div>
 
         {/* oversized wordmark */}
-        <div
-          aria-hidden
-          className="pointer-events-none select-none overflow-hidden border-t border-[var(--border)] pt-10"
-        >
-          <p className="bg-gradient-to-b from-[color-mix(in_srgb,var(--foreground)_12%,transparent)] to-transparent bg-clip-text text-center font-display text-[15vw] font-bold leading-[0.8] tracking-tighter text-transparent sm:text-[8.5rem]">
-            Glideinbir&nbsp;Tech
-          </p>
+        <div aria-hidden className="pointer-events-none select-none overflow-hidden">
+          <Parallax offset={40}>
+            <p className="text-center font-display text-[17vw] font-bold leading-[0.78] tracking-[-0.06em] text-transparent [-webkit-text-stroke:1px_var(--border-strong)] lg:text-[13.5rem]">
+              Glideinbir
+            </p>
+          </Parallax>
         </div>
 
         {/* legal bar */}
-        <div className="flex flex-col gap-3 border-t border-[var(--border)] py-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 border-t border-[var(--border)] py-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {siteConfig.name}. {dict.footer.rights}
           </p>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <Link href={`${base}/privacy`} className="hover:text-foreground">
               {dict.footer.privacy}
             </Link>
@@ -140,6 +134,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               {dict.footer.terms}
             </Link>
             <span>{dict.footer.builtWith}</span>
+            <BackToTop label={dict.footer.backToTop} />
           </div>
         </div>
       </div>
@@ -150,19 +145,46 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
 function FooterCol({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h3 className="text-xs font-semibold uppercase tracking-widest text-muted">{title}</h3>
-      <div className="mt-4 flex flex-col gap-2.5">{children}</div>
+      <h3 className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
+        {title}
+      </h3>
+      <div className="mt-5 flex flex-col gap-3">{children}</div>
     </div>
   );
 }
 
-function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <Link
-      href={href}
-      className="w-fit text-sm text-muted transition-colors hover:text-foreground"
-    >
+function FooterLink({
+  href,
+  children,
+  external,
+}: {
+  href: string;
+  children: React.ReactNode;
+  external?: boolean;
+}) {
+  const cls =
+    "group/fl relative w-fit text-[0.95rem] text-foreground/80 transition-colors hover:text-foreground";
+  const inner = (
+    <>
       {children}
+      <span className="absolute -bottom-0.5 left-0 h-px w-full origin-right scale-x-0 bg-[image:var(--sunset)] transition-transform duration-500 group-hover/fl:origin-left group-hover/fl:scale-x-100" />
+    </>
+  );
+  if (external) {
+    const newTab = href.startsWith("http");
+    return (
+      <a
+        href={href}
+        className={cls}
+        {...(newTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      >
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={cls}>
+      {inner}
     </Link>
   );
 }

@@ -1,37 +1,59 @@
 import { Section, SectionHeading } from "@/components/ui/Section";
-import { Card } from "@/components/ui/Card";
-import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
-import { Tilt } from "@/components/motion/Tilt";
+import { StackCard } from "@/components/sections/StackCard";
 import { processSteps } from "@/content/process";
 import { t, type Dictionary, type Locale } from "@/lib/i18n";
 
-export function Process({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+const tints = ["#ff6b35", "#ff3d7f", "#b36bff", "#6b8bff"];
+
+export function Process({
+  locale,
+  dict,
+  title,
+}: {
+  locale: Locale;
+  dict: Dictionary;
+  title?: string;
+}) {
   return (
-    <Section id="process" tone="raised">
+    <Section id="process">
       <SectionHeading
         eyebrow={dict.process.eyebrow}
-        title={dict.process.heading}
+        index="04"
+        title={title ?? dict.process.heading}
         subtitle={dict.process.subheading}
       />
-      <RevealGroup className="mt-12 grid gap-5 md:grid-cols-2">
-        {processSteps.map((s) => (
-          <RevealItem key={s.step} className="h-full">
-            <Tilt max={4} className="h-full">
-              <Card hover className="flex h-full gap-5 bg-[var(--background)]">
-                <span className="font-display text-4xl font-bold text-[var(--primary)]/25">
+      <div className="mt-16">
+        {processSteps.map((s, i) => (
+          <StackCard key={s.step} index={i} total={processSteps.length}>
+            <div className="grid min-h-[22rem] gap-8 p-7 sm:p-10 md:grid-cols-[auto_1fr] md:gap-14 lg:min-h-[26rem] lg:p-14">
+              <div className="flex items-start justify-between md:flex-col">
+                <span
+                  className="font-display text-[5.5rem] font-semibold leading-[0.8] tracking-[-0.06em] sm:text-[8rem]"
+                  style={{
+                    background: `linear-gradient(160deg, ${tints[i % tints.length]}, transparent 85%)`,
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    color: "transparent",
+                  }}
+                >
                   {s.step}
                 </span>
-                <div>
-                  <h3 className="font-display text-xl font-semibold">{t(s.title, locale)}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted text-pretty">
-                    {t(s.text, locale)}
-                  </p>
-                </div>
-              </Card>
-            </Tilt>
-          </RevealItem>
+                <span className="rounded-full border border-[var(--border)] px-3 py-1 text-xs font-medium text-muted">
+                  {i + 1} / {processSteps.length}
+                </span>
+              </div>
+              <div className="flex flex-col justify-end">
+                <h3 className="font-display text-3xl font-semibold tracking-tight sm:text-5xl">
+                  {t(s.title, locale)}
+                </h3>
+                <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted text-pretty sm:text-lg">
+                  {t(s.text, locale)}
+                </p>
+              </div>
+            </div>
+          </StackCard>
         ))}
-      </RevealGroup>
+      </div>
     </Section>
   );
 }

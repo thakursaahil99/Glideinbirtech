@@ -199,6 +199,33 @@ function Scene({ slug, accent }: { slug: string; accent: string }) {
           <circle cx="160" cy="132" r="5" fill={accent} />
         </g>
       );
+    case "ai-integrations":
+      return (
+        <g>
+          <rect x="40" y="22" width="240" height="136" rx="10" fill={panel} stroke={stroke} />
+          <rect x="56" y="38" width="120" height="22" rx="11" fill={stroke} opacity="0.18" />
+          <rect x="66" y="46" width="90" height="6" rx="3" fill={stroke} opacity="0.55" />
+          <rect x="144" y="70" width="120" height="34" rx="12" fill={accent} opacity="0.9" />
+          <rect x="156" y="80" width="88" height="5" rx="2.5" fill="#fff" opacity="0.9" />
+          <rect x="156" y="90" width="60" height="5" rx="2.5" fill="#fff" opacity="0.6" />
+          <rect x="56" y="114" width="96" height="22" rx="11" fill={stroke} opacity="0.18" />
+          <circle cx="72" cy="125" r="3" fill={accent} />
+          <circle cx="84" cy="125" r="3" fill={accent} opacity="0.6" />
+          <circle cx="96" cy="125" r="3" fill={accent} opacity="0.3" />
+          <path d="M236 30 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 z" fill={accent} />
+        </g>
+      );
+    case "motion-3d":
+      return (
+        <g>
+          <path d="M160 34 L222 68 L160 102 L98 68 Z" fill={accent} opacity="0.85" />
+          <path d="M98 68 L160 102 L160 150 L98 116 Z" fill={accent} opacity="0.45" />
+          <path d="M222 68 L160 102 L160 150 L222 116 Z" fill={accent} opacity="0.25" />
+          <path d="M40 150 C 90 120, 120 170, 170 140 S 250 110, 290 130" stroke={stroke} strokeWidth="1.5" strokeDasharray="4 4" />
+          <circle cx="262" cy="44" r="10" stroke={accent} strokeWidth="2" />
+          <circle cx="58" cy="50" r="5" fill={accent} opacity="0.6" />
+        </g>
+      );
     default:
       return <rect x="40" y="30" width="240" height="120" rx="8" fill={panel} stroke={stroke} />;
   }

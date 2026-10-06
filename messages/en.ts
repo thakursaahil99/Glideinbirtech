@@ -6,10 +6,15 @@ export const en = {
     about: "About",
     contact: "Contact",
     cta: "Start a project",
+    menu: "Menu",
+    close: "Close",
   },
   hero: {
     badge: "Web · Mobile · SEO · Google Ads",
-    title: "I build digital products that bring businesses customers",
+    title: "Digital products that bring *customers*",
+    buildPrefix: "I design & build",
+    rotating: ["websites", "web apps", "mobile apps", "storefronts", "SEO engines", "ad funnels"],
+    available: "Available for new projects",
     subtitle:
       "Full-stack developer from Bir Billing. Websites, web apps, mobile apps and the SEO + ads that feed them — designed to convert, built to last, and handed over as code you own.",
     primary: "Start a project",
@@ -20,37 +25,46 @@ export const en = {
     label: "Working across",
   },
   intro: {
-    heading: "One developer, the whole stack",
+    heading: "One developer, *the whole stack*",
+    eyebrow: "The short version",
     body: "From a Magento storefront to a Laravel API to a Next.js interface — plus the mobile app and the marketing. You get one person accountable for the result, not a chain of vendors pointing at each other.",
     cta: "How I work",
   },
   services: {
     eyebrow: "Services",
-    heading: "What I can build for you",
+    heading: "What I can *build* for you",
     subheading:
-      "Pick one or let me handle the whole journey — design, build, launch, and the marketing that brings customers.",
+      "From the database schema to the last micro-interaction — I design, build and ship complete products that are fast, accessible and a little bit cinematic.",
     whatYouGet: "What you get",
     cta: "Discuss this",
     allCta: "See all services",
+    view: "Explore",
+    included: "What's included",
+    backToServices: "All services",
+    relatedWork: "Related work",
+    otherServices: "Other services",
+    detailCta: "Get a quote for this",
+    howItWorks: "How a project runs",
     pageTitle: "Services",
-    pageHeading: "From a landing page to a mobile app — and the traffic to fill it",
+    pageHeading: "From a landing page to a mobile app — and the *traffic* to fill it",
     pageSubheading:
       "Every project is scoped on a free call and quoted fixed. Below is what each service includes; most clients combine two or three.",
   },
   stack: {
     eyebrow: "Tech stack",
-    heading: "Every stack — whatever fits your project",
+    heading: "Every stack — *whatever fits*",
     subheading:
       "Not locked to one tool. I choose the stack that gives you the best speed, cost and long-term maintainability, and explain the choice in plain language.",
   },
   work: {
     eyebrow: "Selected work",
-    heading: "Things I've shipped",
+    heading: "Things I've *shipped*",
+    scrollHint: "Scroll to explore",
     subheading: "Booking platforms, eCommerce storefronts, mobile apps and marketing sites.",
     viewAll: "View all work",
     visit: "Visit site",
     pageTitle: "Work",
-    pageHeading: "Selected work",
+    pageHeading: "Selected *work*",
     pageSubheading:
       "Four years of eCommerce platforms, web and mobile apps. Click any project for the full case study.",
     caseStudy: "Case study",
@@ -66,7 +80,7 @@ export const en = {
   },
   process: {
     eyebrow: "Process",
-    heading: "How I work",
+    heading: "How I *work*",
     subheading: "You always know what is happening and what comes next.",
   },
   about: {
@@ -79,6 +93,8 @@ export const en = {
     skills: "Skills",
     principles: "How I think about building",
     toolbox: "Toolbox",
+    lifeInBir: "Built from the *mountains*",
+    lifeInBirText: "Bir Billing is one of the best paragliding sites in the world — and the place I build from. It is why Glide in Bir exists, and why I care about software that works on a patchy mountain connection.",
     cta: "Work with me",
   },
   stats: {
@@ -86,17 +102,17 @@ export const en = {
   },
   testimonials: {
     eyebrow: "Words",
-    heading: "What clients say",
+    heading: "What clients *say*",
     subheading: "Placeholder quotes — real client words will replace these.",
   },
   faq: {
     eyebrow: "FAQ",
-    heading: "Common questions",
+    heading: "Common *questions*",
     subheading: "Still unsure? Message me on WhatsApp — I answer fast.",
   },
   pricing: {
     eyebrow: "Pricing",
-    heading: "Transparent starting prices",
+    heading: "Transparent *starting* prices",
     subheading:
       "Every project is quoted after a free call. These are typical starting points, not fixed packages.",
     startingAt: "Starting at",
@@ -109,7 +125,7 @@ export const en = {
     note: "Prices in INR. GST extra where applicable. 50% to start, 50% on delivery.",
   },
   finalCta: {
-    heading: "Have a project in mind?",
+    heading: "Have a project *in mind?*",
     subheading:
       "Tell me what you want to build. You'll get a clear quote and timeline — usually the same day. No pressure, no jargon.",
   },
@@ -122,13 +138,14 @@ export const en = {
     emailPlaceholder: "you@example.com",
     service: "What do you need?",
     serviceOptions: [
-      "Landing page / website",
-      "Web app",
+      "Web app / platform",
+      "eCommerce",
+      "AI integration",
+      "Motion & 3D site",
       "Mobile app",
-      "eCommerce / Magento",
-      "SEO",
-      "Google Ads",
+      "Landing page / website",
       "CRM / custom software",
+      "SEO / Google Ads",
       "Not sure yet",
     ],
     budget: "Rough budget (optional)",
@@ -157,7 +174,7 @@ export const en = {
   },
   contactPage: {
     title: "Contact",
-    heading: "Let's talk about your project",
+    heading: "Let's talk about your *project*",
     subheading:
       "Fill the form or reach me directly. I reply to every serious enquiry within 4 working hours.",
     directTitle: "Prefer to reach out directly?",
@@ -168,7 +185,9 @@ export const en = {
   },
   footer: {
     tagline: "Full-stack developer — websites, apps, and the marketing that grows them.",
-    ctaHeading: "Let's build something that works.",
+    ctaHeading: "Let's build something *remarkable*",
+    localTime: "Local time in Bir",
+    backToTop: "Back to top",
     exploreTitle: "Explore",
     servicesTitle: "Services",
     connectTitle: "Connect",

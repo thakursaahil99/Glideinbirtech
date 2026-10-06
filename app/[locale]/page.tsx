@@ -26,8 +26,8 @@ export async function generateMetadata({
     path: "",
     title:
       typed === "hi"
-        ? "फुल-स्टैक डेवलपर — वेब, मोबाइल, SEO और Google Ads"
-        : "Full-stack developer — web, mobile, SEO & Google Ads",
+        ? "फुल-स्टैक डेवलपर — वेब, मोबाइल, AI, SEO और Google Ads"
+        : "Full-stack developer — web, mobile, AI, SEO & Google Ads",
     description: t(siteConfig.tagline, typed),
   });
 }
@@ -49,9 +49,9 @@ export default async function HomePage({
       <Hero locale={typed} dict={dict} />
       <Intro locale={typed} dict={dict} />
       <Services locale={typed} dict={dict} limit={6} />
-      <Portfolio locale={typed} dict={dict} limit={4} />
-      <TechStack locale={typed} dict={dict} />
+      <Portfolio locale={typed} dict={dict} limit={6} />
       <Process locale={typed} dict={dict} />
+      <TechStack locale={typed} dict={dict} />
       <Testimonials locale={typed} dict={dict} />
       <Faq locale={typed} dict={dict} />
       <FinalCta locale={typed} dict={dict} />

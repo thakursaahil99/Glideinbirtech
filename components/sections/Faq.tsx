@@ -44,13 +44,13 @@ export function Faq({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                   aria-expanded={isOpen}
                   className="group flex w-full items-center justify-between gap-6 py-6 text-left sm:py-7"
                 >
-                  <span className="flex items-baseline gap-4">
+                  <span className="flex min-w-0 items-baseline gap-4">
                     <span className="text-xs font-medium text-muted tabular-nums">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span
                       className={cn(
-                        "font-display text-lg font-medium tracking-tight transition-colors sm:text-2xl",
+                        "min-w-0 font-display text-lg font-medium tracking-tight transition-colors sm:text-2xl",
                         isOpen ? "text-foreground" : "text-foreground/80 group-hover:text-foreground",
                       )}
                     >

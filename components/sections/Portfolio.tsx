@@ -48,23 +48,27 @@ function ProjectCard({
         <div className="absolute inset-0 transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]">
           <ProjectImage p={p} sizes="(max-width: 1024px) 100vw, 60vw" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 via-45% to-transparent" />
+        {/* the dark overlay is only needed where the title sits on the image (lg+) */}
+        <div className="absolute inset-0 hidden bg-gradient-to-t from-black/90 via-black/35 via-45% to-transparent lg:block" />
         <div
           className="absolute inset-0 opacity-0 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-30"
           style={{ backgroundColor: p.accent }}
         />
-        <div className="absolute left-5 top-5 flex items-center gap-2">
-          <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-black backdrop-blur">
+        <div className="absolute left-4 top-4 flex items-center gap-2 lg:left-5 lg:top-5">
+          <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-black shadow-sm backdrop-blur">
             {p.year}
           </span>
-          <span className="rounded-full border border-white/30 bg-black/30 px-3 py-1 text-xs font-medium text-white backdrop-blur">
+          <span className="hidden rounded-full border border-white/30 bg-black/30 px-3 py-1 text-xs font-medium text-white backdrop-blur lg:inline">
             {t(p.category, locale)}
           </span>
         </div>
-        <span className="absolute right-5 top-5 font-display text-5xl font-semibold text-white/80 tabular-nums">
+        <span className="absolute right-5 top-5 hidden font-display text-5xl font-semibold text-white/80 tabular-nums lg:block">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4 text-white">
+        <span className="absolute bottom-4 right-4 flex h-11 w-11 items-center justify-center rounded-full bg-white text-black shadow-md transition-transform duration-500 group-hover:rotate-45 lg:hidden">
+          <ArrowUpRight className="h-5 w-5" />
+        </span>
+        <div className="absolute inset-x-5 bottom-5 hidden items-end justify-between gap-4 text-white lg:flex">
           <div className="min-w-0">
             <h3 className="font-display text-3xl font-semibold leading-none tracking-tight sm:text-4xl">
               {p.name}
@@ -75,6 +79,21 @@ function ProjectCard({
             <ArrowUpRight className="h-5 w-5" />
           </span>
         </div>
+      </div>
+
+      {/* phones & tablets: details below the image so they never fight its text */}
+      <div className="px-1 pt-4 lg:hidden">
+        <div className="flex items-center gap-3 text-xs">
+          <span className="font-display font-semibold text-muted tabular-nums">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span className="h-px w-6" style={{ backgroundColor: p.accent }} />
+          <span className="font-medium" style={{ color: p.accent }}>
+            {t(p.category, locale)}
+          </span>
+        </div>
+        <h3 className="mt-2 font-display text-2xl font-semibold tracking-tight sm:text-3xl">{p.name}</h3>
+        <p className="mt-1.5 line-clamp-2 text-sm text-muted">{t(p.result, locale)}</p>
       </div>
     </Link>
   );

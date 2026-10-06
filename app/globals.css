@@ -115,6 +115,9 @@
 
   html {
     color-scheme: light dark;
+    /* decorative glows bleed past the edges; never let them widen the page
+       (clip, unlike hidden, keeps position: sticky working) */
+    overflow-x: clip;
   }
   html:not(.lenis) {
     scroll-behavior: smooth;
@@ -426,6 +429,7 @@
 @layer components {
   .eyebrow {
     display: inline-flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 0.6rem;
     font-size: 0.72rem;

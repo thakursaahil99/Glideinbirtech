@@ -78,7 +78,7 @@ export default async function ContactPage({
 
       <Section size="sm" className="pt-0">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
-          <div className="space-y-4">
+          <div className="min-w-0 space-y-4">
             {channels.map((ch, i) => {
               const Icon = ch.icon;
               return (
